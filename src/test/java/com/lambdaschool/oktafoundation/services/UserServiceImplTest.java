@@ -156,7 +156,7 @@ public class UserServiceImplTest
         System.out.println("\n*** Seed Data ***");
         for (User u : userList)
         {
-            System.out.println(u.getUserid() + " " + u.getUsername());
+            System.out.println(u.getUserid() + " " + u.getName());
         }
         System.out.println("*** Seed Data ***\n");
 
@@ -177,7 +177,7 @@ public class UserServiceImplTest
 
         assertEquals("testadmin",
             userService.findUserById(101L)
-                .getUsername());
+                .getName());
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -188,7 +188,7 @@ public class UserServiceImplTest
 
         assertEquals("admin",
             userService.findUserById(10L)
-                .getUsername());
+                .getName());
     }
 
     @Test
@@ -233,31 +233,31 @@ public class UserServiceImplTest
     }
 
     @Test
-    public void findByUsername()
+    public void findByName()
     {
-        Mockito.when(userrepos.findByUsername("testadmin"))
+        Mockito.when(userrepos.findByName("testadmin"))
             .thenReturn(userList.get(0));
 
         assertEquals("testadmin",
             userService.findByName("testadmin")
-                .getUsername());
+                .getName());
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void findByUsernameNotfound()
+    public void findBynameNotfound()
     {
-        Mockito.when(userrepos.findByUsername("nonsense"))
+        Mockito.when(userrepos.findByName("nonsense"))
             .thenReturn(null);
 
         assertEquals("nonsense",
             userService.findByName("nonsense")
-                .getUsername());
+                .getName());
     }
 
     @Test
     public void findByNameContaining()
     {
-        Mockito.when(userrepos.findByUsernameContainingIgnoreCase("a"))
+        Mockito.when(userrepos.findByNameContainingIgnoreCase("a"))
             .thenReturn(userList);
 
         assertEquals(5,
@@ -284,7 +284,7 @@ public class UserServiceImplTest
 
         assertEquals("tiger",
             userService.save(u2)
-                .getUsername());
+                .getName());
     }
 
     @Test

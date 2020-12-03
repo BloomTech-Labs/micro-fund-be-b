@@ -97,7 +97,7 @@ public class UserControllerIntegrationTest
     public void getUserLikeName() throws
                                   Exception
     {
-        this.mockMvc.perform(get("/users/user/name/like/{userName}",
+        this.mockMvc.perform(get("/users/user/name/like/{name}",
             "kitty"))
             .andDo(print())
             .andExpect(status().isOk())
@@ -130,7 +130,7 @@ public class UserControllerIntegrationTest
     public void getUserByName() throws
                                 Exception
     {
-        this.mockMvc.perform(get("/users/user/name/{userName}",
+        this.mockMvc.perform(get("/users/user/name/{name}",
             "admin"))
             .andDo(print())
             .andExpect(status().isOk())
@@ -141,7 +141,7 @@ public class UserControllerIntegrationTest
     public void getUserByNameNotFound() throws
                                         Exception
     {
-        this.mockMvc.perform(get("/users/user/name/{userName}",
+        this.mockMvc.perform(get("/users/user/name/{name}",
             "rabbit"))
             .andDo(print())
             .andExpect(status().is4xxClientError())
@@ -153,7 +153,7 @@ public class UserControllerIntegrationTest
                                  Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.post("/users/user")
-            .content("{\"username\": \"Ginger\"}")
+            .content("{\"name\": \"Ginger\"}")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
@@ -167,7 +167,7 @@ public class UserControllerIntegrationTest
                                 Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.put("/users/user/11")
-            .content("{\"username\": \"stumps\"}")
+            .content("{\"name\": \"stumps\"}")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
@@ -200,7 +200,7 @@ public class UserControllerIntegrationTest
     {
         mockMvc.perform(MockMvcRequestBuilders.patch("/users/user/{userid}",
             7)
-            .content("{\"username\": \"EATEATEAT\"}")
+            .content("{\"name\": \"EATEATEAT\"}")
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())

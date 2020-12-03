@@ -82,8 +82,7 @@ public class UserController
             String userName)
     {
         User u = userService.findByName(userName);
-        return new ResponseEntity<>(u,
-            HttpStatus.OK);
+        return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
     /**

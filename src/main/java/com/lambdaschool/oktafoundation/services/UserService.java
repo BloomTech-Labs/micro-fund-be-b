@@ -21,12 +21,12 @@ public interface UserService
     List<User> findAll();
 
     /**
-     * A list of all users whose username contains the given substring
+     * A list of all users whose name contains the given substring
      *
-     * @param username The substring (String) of the username of the Users you seek
-     * @return List of users whose username contains the given substring
+     * @param name The substring (String) of the name of the Users you seek
+     * @return List of users whose name contains the given substring
      */
-    List<User> findByNameContaining(String username);
+    List<User> findByNameContaining(String name);
 
     /**
      * Returns the user with the given primary key.
