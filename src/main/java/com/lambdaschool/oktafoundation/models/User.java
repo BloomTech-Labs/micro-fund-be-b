@@ -16,8 +16,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "users")
-public class User
-    extends Auditable
+public class User extends Auditable
 {
     /**
      * The primary key (long) of the users table.
@@ -29,6 +28,17 @@ public class User
     /**
      * The username (String). Cannot be null and must be unique
      */
+//    @NotNull
+//    @Column(unique = true)
+//    private String username;
+
+    /** New Stuff added by KMcgee**/
+    private String address;
+    private String phone;
+    private String imageUrl;
+    private String description;
+    private long orgid;
+
     @NotNull
     @Column(unique = true)
     private String name;
@@ -36,22 +46,16 @@ public class User
     /**
      * A list of emails for this user
      */
-    @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Useremail> useremails = new ArrayList<>();
 
     /**
      * Part of the join relationship between user and role
      * connects users to the user role combination
      */
-    @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-    @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
     /**
@@ -88,6 +92,7 @@ public class User
      *
      * @param name The name (String) of the user
      */
+
     public User(String name,
                 String address,
                 String phone,
@@ -99,6 +104,7 @@ public class User
         setPhone(phone);
         setImageUrl(imageUrl);
         setDescription(description);
+
     }
 
     /**
@@ -121,10 +127,60 @@ public class User
         this.userid = userid;
     }
 
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public String getImageUrl()
+    {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl)
+    {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public long getOrgid()
+    {
+        return orgid;
+    }
+
+    public void setOrgid(long orgid)
+    {
+        this.orgid = orgid;
+    }
+
     /**
-     * Getter for username
+     * Getter for name
      *
-     * @return the username (String) lowercase
+     * @return the name (String) lowercase
      */
     public String getName()
     {

@@ -168,7 +168,7 @@ public class UserControllerUnitTest
         System.out.println("\n*** Seed Data ***");
         for (User u : userList)
         {
-            System.out.println(u.getUserid() + " " + u.getUsername());
+            System.out.println(u.getUserid() + " " + u.getName());
         }
         System.out.println("*** Seed Data ***\n");
 
@@ -362,7 +362,7 @@ public class UserControllerUnitTest
         RequestBuilder rb = MockMvcRequestBuilders.post(apiUrl)
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
-            .content("{\"username\": \"tiger\", \"password\": \"ILuvM4th!\", \"primaryemail\" : \"tiger@home.local\"}");
+            .content("{\"name\": \"tiger\", \"password\": \"ILuvM4th!\", \"primaryemail\" : \"tiger@home.local\"}");
 
         mockMvc.perform(rb)
             .andExpect(status().isCreated())
@@ -383,7 +383,7 @@ public class UserControllerUnitTest
             100L)
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
-            .content("{\"username\": \"tigerUpdated\", \"password\": \"EATEATEAT\", \"primaryemail\" : \"ginger@home.local\"}");
+            .content("{\"name\": \"tigerUpdated\", \"password\": \"EATEATEAT\", \"primaryemail\" : \"ginger@home.local\"}");
 
         mockMvc.perform(rb)
             .andExpect(status().is2xxSuccessful())

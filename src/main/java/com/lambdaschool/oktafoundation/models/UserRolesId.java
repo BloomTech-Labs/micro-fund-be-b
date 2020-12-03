@@ -7,8 +7,7 @@ import java.io.Serializable;
  * Class to represent the complex primary key for UserRoles
  */
 @Embeddable
-public class UserRolesId
-    implements Serializable
+public class UserRolesId implements Serializable
 {
     /**
      * The id of the user

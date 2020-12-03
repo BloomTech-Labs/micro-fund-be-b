@@ -19,9 +19,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "userroles")
 @IdClass(UserRolesId.class)
-public class UserRoles
-    extends Auditable
-    implements Serializable
+public class UserRoles extends Auditable implements Serializable
 {
     /**
      * 1/2 of the primary key (long) for userroles.
@@ -31,8 +29,7 @@ public class UserRoles
     @ManyToOne
     @NotNull
     @JoinColumn(name = "userid")
-    @JsonIgnoreProperties(value = "roles",
-        allowSetters = true)
+    @JsonIgnoreProperties(value = "roles", allowSetters = true)
     private User user;
 
     /**
@@ -43,8 +40,7 @@ public class UserRoles
     @ManyToOne
     @NotNull
     @JoinColumn(name = "roleid")
-    @JsonIgnoreProperties(value = "users",
-        allowSetters = true)
+    @JsonIgnoreProperties(value = "users", allowSetters = true)
     private Role role;
 
     /**

@@ -140,7 +140,7 @@ public class SeedData
                 User fakeUser;
 
                 fakeUser = new User(nameFaker.name()
-                    .username());
+                    .name());
                 fakeUser.getRoles()
                     .add(new UserRoles(fakeUser,
                         r2));

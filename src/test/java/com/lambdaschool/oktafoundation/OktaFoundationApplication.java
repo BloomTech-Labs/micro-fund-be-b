@@ -17,7 +17,6 @@ public class OktaFoundationApplication
      */
     public static void main(String[] args)
     {
-        SpringApplication.run(OktaFoundationApplication.class,
-            args);
+        SpringApplication.run(OktaFoundationApplication.class, args);
     }
 }

@@ -233,7 +233,7 @@ public class UserServiceImplTest
     }
 
     @Test
-    public void findByUsername()
+    public void findByName()
     {
         Mockito.when(userrepos.findByName("testadmin"))
             .thenReturn(userList.get(0));
@@ -244,7 +244,7 @@ public class UserServiceImplTest
     }
 
     @Test(expected = ResourceNotFoundException.class)
-    public void findByUsernameNotfound()
+    public void findBynameNotfound()
     {
         Mockito.when(userrepos.findByName("nonsense"))
             .thenReturn(null);

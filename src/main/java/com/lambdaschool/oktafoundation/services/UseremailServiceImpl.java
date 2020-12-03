@@ -16,8 +16,7 @@ import java.util.List;
  */
 @Transactional
 @Service(value = "useremailService")
-public class UseremailServiceImpl
-    implements UseremailService
+public class UseremailServiceImpl implements UseremailService
 {
     /**
      * Connects this service to the Useremail model
@@ -65,7 +64,7 @@ public class UseremailServiceImpl
             if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(id)
                 .get()
                 .getUser()
-                .getUsername()))
+                .getName()))
             {
                 useremailrepos.deleteById(id);
             }
@@ -87,7 +86,7 @@ public class UseremailServiceImpl
             if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(useremailid)
                 .get()
                 .getUser()
-                .getUsername()))
+                .getName()))
             {
                 Useremail useremail = findUseremailById(useremailid);
                 useremail.setUseremail(emailaddress.toLowerCase());
@@ -112,7 +111,7 @@ public class UseremailServiceImpl
     {
         User currentUser = userService.findUserById(userid);
 
-        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getName()))
         {
             Useremail newUserEmail = new Useremail(currentUser,
                 emailaddress);
