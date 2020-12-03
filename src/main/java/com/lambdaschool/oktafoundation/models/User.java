@@ -59,6 +59,26 @@ public class User extends Auditable
     private Set<UserRoles> roles = new HashSet<>();
 
     /**
+     * The users address
+     */
+    private String address;
+
+    /**
+     * The users phone
+     */
+    private String phone;
+
+    /**
+     * Image if user provides it
+     */
+    private String imageUrl;
+
+    /**
+     * User description if they provide it
+     */
+    private String description;
+
+    /**
      * Default constructor used primarily by the JPA.
      */
     public User()
@@ -72,9 +92,19 @@ public class User extends Auditable
      *
      * @param name The name (String) of the user
      */
-    public User(String name)
+
+    public User(String name,
+                String address,
+                String phone,
+                String imageUrl,
+                String description)
     {
         setName(name);
+        setAddress(address);
+        setPhone(phone);
+        setImageUrl(imageUrl);
+        setDescription(description);
+
     }
 
     /**
@@ -160,7 +190,7 @@ public class User extends Auditable
     /**
      * setter for username
      *
-     * @param name the new username (String) converted to lowercase
+     * @param name the new name (String) converted to lowercase
      */
     public void setName(String name)
     {
@@ -205,6 +235,86 @@ public class User extends Auditable
     public void setRoles(Set<UserRoles> roles)
     {
         this.roles = roles;
+    }
+
+    /**
+     * Getter for address
+     *
+     * @return the address (String)
+     */
+    public String getAddress()
+    {
+        return address;
+    }
+
+    /**
+     * setter for address
+     *
+     * @param address the new address (String)
+     */
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    /**
+     * Getter for phone
+     *
+     * @return the phone (String)
+     */
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    /**
+     * setter for phone
+     *
+     * @param phone the new phone (String)
+     */
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    /**
+     * Getter for imageUrl
+     *
+     * @return the imageUrl (String)
+     */
+    public String getImageUrl()
+    {
+        return imageUrl;
+    }
+
+    /**
+     * setter for imageUrl
+     *
+     * @param imageUrl the new imageUrl (String)
+     */
+    public void setImageUrl(String imageUrl)
+    {
+        this.imageUrl = imageUrl;
+    }
+
+    /**
+     * Getter for description
+     *
+     * @return the description (String)
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * setter for description
+     *
+     * @param description the new description (String)
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     /**

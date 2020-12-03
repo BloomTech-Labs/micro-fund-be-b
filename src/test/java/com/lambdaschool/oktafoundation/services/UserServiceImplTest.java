@@ -59,7 +59,7 @@ public class UserServiceImplTest
         r3.setRoleid(3);
 
         // admin, data, user
-        User u1 = new User("testadmin");
+        User u1 = new User("testadmin", "", "", "", "");
         u1.getRoles()
             .add(new UserRoles(u1,
                 r1));
@@ -89,7 +89,7 @@ public class UserServiceImplTest
 
         // data, user
         ArrayList<UserRoles> datas = new ArrayList<>();
-        User u2 = new User("cinnamon");
+        User u2 = new User("cinnamon", "", "", "", "");
         u1.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -122,7 +122,7 @@ public class UserServiceImplTest
         userList.add(u2);
 
         // user
-        User u3 = new User("testingbarn");
+        User u3 = new User("testingbarn", "", "", "", "");
         u3.getRoles()
             .add(new UserRoles(u3,
                 r1));
@@ -137,7 +137,7 @@ public class UserServiceImplTest
         u3.setUserid(103);
         userList.add(u3);
 
-        User u4 = new User("testingcat");
+        User u4 = new User("testingcat", "", "", "", "");
         u4.getRoles()
             .add(new UserRoles(u4,
                 r2));
@@ -145,7 +145,7 @@ public class UserServiceImplTest
         u4.setUserid(104);
         userList.add(u4);
 
-        User u5 = new User("testingdog");
+        User u5 = new User("testingdog", "", "", "", "");
         u4.getRoles()
             .add(new UserRoles(u5,
                 r2));
@@ -271,7 +271,7 @@ public class UserServiceImplTest
         Role r2 = new Role("user");
         r2.setRoleid(2);
 
-        User u2 = new User("tiger");
+        User u2 = new User("tiger", "", "", "", "");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -293,7 +293,7 @@ public class UserServiceImplTest
         Role r2 = new Role("user");
         r2.setRoleid(2);
 
-        User u2 = new User("tiger");
+        User u2 = new User("tiger", "", "", "", "");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -319,7 +319,7 @@ public class UserServiceImplTest
         Role r2 = new Role("user");
         r2.setRoleid(2);
 
-        User u2 = new User("cinnamon");
+        User u2 = new User("cinnamon", "", "", "", "");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -357,7 +357,7 @@ public class UserServiceImplTest
         Role r2 = new Role("user");
         r2.setRoleid(2);
 
-        User u2 = new User("cinnamon");
+        User u2 = new User("cinnamon", "", "", "", "");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));
@@ -395,7 +395,7 @@ public class UserServiceImplTest
         Role r2 = new Role("user");
         r2.setRoleid(2);
 
-        User u2 = new User("cinnamon");
+        User u2 = new User("cinnamon", "", "", "", "");
         u2.getRoles()
             .add(new UserRoles(u2,
                 r2));

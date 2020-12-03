@@ -121,6 +121,14 @@ public class UserServiceImpl
                     ue.getUseremail()));
         }
 
+        newUser.setAddress(user.getAddress());
+
+        newUser.setPhone(user.getPhone());
+
+        newUser.setImageUrl(user.getImageUrl());
+
+        newUser.setDescription(user.getDescription());
+
         return userrepos.save(newUser);
     }
 

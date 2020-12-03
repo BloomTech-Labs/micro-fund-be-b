@@ -50,7 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         {
             if (userrepos.findByName(authentication.getName()) == null)
             {
-                User newUser = new User(authentication.getName());
+                User newUser = new User(authentication.getName(), "", "", "", "");
 
                 // adds a default USER role to this new user
                 Set<UserRoles> newRoles = new HashSet<>();
