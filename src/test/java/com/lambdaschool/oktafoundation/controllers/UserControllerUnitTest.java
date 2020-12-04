@@ -168,7 +168,7 @@ public class UserControllerUnitTest
         System.out.println("\n*** Seed Data ***");
         for (User u : userList)
         {
-            System.out.println(u.getUserid() + " " + u.getName());
+            System.out.println(u.getUserid() + " " + u.getUsername());
         }
         System.out.println("*** Seed Data ***\n");
 
