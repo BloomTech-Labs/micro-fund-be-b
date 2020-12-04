@@ -14,16 +14,16 @@ public interface UserRepository
     /**
      * Find a user based off over username
      *
-     * @param name the name (String) of user you seek
+     * @param username the name (String) of user you seek
      * @return the first user object with the name you seek
      */
-    User findByName(String name);
+    User findByUsername(String username);
 
     /**
      * Find all users whose name contains a given substring ignoring case
      *
-     * @param name the substring of the names (String) you seek
+     * @param username the substring of the names (String) you seek
      * @return List of users whose name contain the given substring ignoring case
      */
-    List<User> findByNameContainingIgnoreCase(String name);
+    List<User> findByUsernameContainingIgnoreCase(String username);
 }
