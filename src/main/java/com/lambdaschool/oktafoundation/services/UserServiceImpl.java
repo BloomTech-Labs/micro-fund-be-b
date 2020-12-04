@@ -44,10 +44,10 @@ public class UserServiceImpl
     }
 
     @Override
-    public List<User> findByNameContaining(String name)
+    public List<User> findByNameContaining(String username)
     {
 
-        return userrepos.findByNameContainingIgnoreCase(name.toLowerCase());
+        return userrepos.findByUsernameContainingIgnoreCase(username.toLowerCase());
     }
 
     @Override
@@ -74,12 +74,12 @@ public class UserServiceImpl
     }
 
     @Override
-    public User findByName(String name)
+    public User findByName(String username)
     {
-        User uu = userrepos.findByName(name.toLowerCase());
+        User uu = userrepos.findByUsername(username.toLowerCase());
         if (uu == null)
         {
-            throw new ResourceNotFoundException("Name " + name + " not found!");
+            throw new ResourceNotFoundException("Username " + username + " not found!");
         }
         return uu;
     }
@@ -98,7 +98,7 @@ public class UserServiceImpl
             newUser.setUserid(user.getUserid());
         }
 
-        newUser.setName(user.getName()
+        newUser.setUsername(user.getUsername()
             .toLowerCase());
 
         newUser.getRoles()
@@ -142,11 +142,11 @@ public class UserServiceImpl
 
         // update own thing
         // admin update
-        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getName()))
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
         {
-            if (user.getName() != null)
+            if (user.getUsername() != null)
             {
-                currentUser.setName(user.getName()
+                currentUser.setUsername(user.getUsername()
                     .toLowerCase());
             }
 
