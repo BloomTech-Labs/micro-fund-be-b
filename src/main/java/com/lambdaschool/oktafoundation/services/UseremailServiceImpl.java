@@ -64,7 +64,7 @@ public class UseremailServiceImpl implements UseremailService
             if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(id)
                 .get()
                 .getUser()
-                .getName()))
+                .getUsername()))
             {
                 useremailrepos.deleteById(id);
             }
@@ -86,7 +86,7 @@ public class UseremailServiceImpl implements UseremailService
             if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(useremailid)
                 .get()
                 .getUser()
-                .getName()))
+                .getUsername()))
             {
                 Useremail useremail = findUseremailById(useremailid);
                 useremail.setUseremail(emailaddress.toLowerCase());
@@ -111,7 +111,7 @@ public class UseremailServiceImpl implements UseremailService
     {
         User currentUser = userService.findUserById(userid);
 
-        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getName()))
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
         {
             Useremail newUserEmail = new Useremail(currentUser,
                 emailaddress);
