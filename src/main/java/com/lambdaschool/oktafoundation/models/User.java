@@ -37,11 +37,6 @@ public class User extends Auditable
     private String phone;
     private String imageUrl;
     private String description;
-    private long orgid;
-
-//    @NotNull
-//    @Column(unique = true)
-//    private String name;
 
     /**
      * A list of emails for this user
@@ -58,25 +53,18 @@ public class User extends Auditable
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
-    /**
-     * The users address
-     */
-//    private String address;
+    //users - KM (one user can have many organizations)
+    @ManyToMany()
+    @JoinTable(name = "userorganizations", joinColumns = @JoinColumn(name = "userid"),
+        inverseJoinColumns = @JoinColumn(name = "orgid"))
+    @JsonIgnoreProperties(value = "users",
+        allowSetters = true)
+    List<Organization> organizations = new ArrayList<>();
 
-    /**
-     * The users phone
-     */
-//    private String phone;
-
-    /**
-     * Image if user provides it
-     */
-//    private String imageUrl;
-
-    /**
-     * User description if they provide it
-     */
-//    private String description;
+    //applications - KM (one user can submit many applications)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private List<Application> applications = new ArrayList<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -159,16 +147,6 @@ public class User extends Auditable
         this.description = description;
     }
 
-    public long getOrgid()
-    {
-        return orgid;
-    }
-
-    public void setOrgid(long orgid)
-    {
-        this.orgid = orgid;
-    }
-
     /**
      * Getter for name
      *
@@ -229,85 +207,27 @@ public class User extends Auditable
         this.roles = roles;
     }
 
-    /**
-     * Getter for address
-     *
-     * @return the address (String)
-     */
-//    public String getAddress()
-//    {
-//        return address;
-//    }
+    public List<Application> getApplications()
+    {
+        return applications;
+    }
 
-    /**
-     * setter for address
-     *
-     * @param address the new address (String)
-     */
-//    public void setAddress(String address)
-//    {
-//        this.address = address;
-//    }
+    public void setApplications(List<Application> applications)
+    {
+        this.applications = applications;
+    }
 
-    /**
-     * Getter for phone
-     *
-     * @return the phone (String)
-     */
-//    public String getPhone()
-//    {
-//        return phone;
-//    }
+    public List<Organization> getOrganizations()
+    {
+        return organizations;
+    }
 
-    /**
-     * setter for phone
-     *
-     * @param phone the new phone (String)
-     */
-//    public void setPhone(String phone)
-//    {
-//        this.phone = phone;
-//    }
+    public void setOrganizations(List<Organization> organizations)
+    {
+        this.organizations = organizations;
+    }
 
-    /**
-     * Getter for imageUrl
-     *
-     * @return the imageUrl (String)
-     */
-//    public String getImageUrl()
-//    {
-//        return imageUrl;
-//    }
 
-    /**
-     * setter for imageUrl
-     *
-     * @param imageUrl the new imageUrl (String)
-     */
-//    public void setImageUrl(String imageUrl)
-//    {
-//        this.imageUrl = imageUrl;
-//    }
-
-    /**
-     * Getter for description
-     *
-     * @return the description (String)
-     */
-//    public String getDescription()
-//    {
-//        return description;
-//    }
-
-    /**
-     * setter for description
-     *
-     * @param description the new description (String)
-     */
-//    public void setDescription(String description)
-//    {
-//        this.description = description;
-//    }
 
     /**
      * Internally, user security requires a list of authorities, roles, that the user has. This method is a simple way to provide those.

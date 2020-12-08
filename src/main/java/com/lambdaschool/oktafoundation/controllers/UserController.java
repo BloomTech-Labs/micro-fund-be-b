@@ -28,7 +28,6 @@ public class UserController
      */
     @Autowired
     private UserService userService;
-
     /**
      * Returns a list of all users
      * <br>Example: <a href="http://localhost:2019/users/users">http://localhost:2019/users/users</a>
@@ -217,8 +216,7 @@ public class UserController
      * @return JSON of the current user. Status of OK
      * @see UserService#findByName(String) UserService.findByName(authenticated user)
      */
-    @GetMapping(value = "/getuserinfo",
-        produces = {"application/json"})
+    @GetMapping(value = "/getuserinfo", produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
     {
         User u = userService.findByName(authentication.getName());

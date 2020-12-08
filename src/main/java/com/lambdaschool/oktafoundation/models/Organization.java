@@ -1,7 +1,11 @@
 package com.lambdaschool.oktafoundation.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "organizations")
@@ -16,6 +20,18 @@ public class Organization extends Auditable
 
     private String address;
     private String phone;
+
+    //applications - KM
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "organization", allowSetters = true)
+    private List<Application> applications = new ArrayList<>();
+
+
+
+    // tying organization to users - KM
+    @ManyToMany(mappedBy = "organizations")
+    @JsonIgnoreProperties(value = "organizations", allowSetters = true)
+    private List<User> users = new ArrayList<>();
 
     public Organization()
     {
@@ -69,4 +85,26 @@ public class Organization extends Auditable
     {
         this.phone = phone;
     }
+
+    public List<Application> getApplications()
+    {
+        return applications;
+    }
+
+    public void setApplications(List<Application> applications)
+    {
+        this.applications = applications;
+    }
+
+    public List<User> getUsers()
+    {
+        return users;
+    }
+
+    public void setUsers(List<User> users)
+    {
+        this.users = users;
+    }
+
+
 }
