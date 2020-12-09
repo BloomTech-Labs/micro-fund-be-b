@@ -58,7 +58,5 @@ public interface RoleService
      * @param role The role object containing the new name - only roles name can be updated through this process
      * @return The complete role with the new name
      */
-    Role update(
-        long id,
-        Role role);
+    Role update(long id, Role role);
 }

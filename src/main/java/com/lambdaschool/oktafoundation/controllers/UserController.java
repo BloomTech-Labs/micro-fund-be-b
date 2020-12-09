@@ -35,14 +35,13 @@ public class UserController
      * @return JSON list of all users with a status of OK
      * @see UserService#findAll() UserService.findAll()
      */
+    // KM changes - changed value from users to all - may need to adjust authorization
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping(value = "/users",
-        produces = "application/json")
+    @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<?> listAllUsers()
     {
         List<User> myUsers = userService.findAll();
-        return new ResponseEntity<>(myUsers,
-            HttpStatus.OK);
+        return new ResponseEntity<>(myUsers, HttpStatus.OK);
     }
 
     /**
@@ -56,13 +55,10 @@ public class UserController
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/user/{userId}",
         produces = "application/json")
-    public ResponseEntity<?> getUserById(
-        @PathVariable
-            Long userId)
+    public ResponseEntity<?> getUserById(@PathVariable Long userId)
     {
         User u = userService.findUserById(userId);
-        return new ResponseEntity<>(u,
-            HttpStatus.OK);
+        return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
     /**
@@ -95,9 +91,7 @@ public class UserController
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/user/name/like/{userName}",
         produces = "application/json")
-    public ResponseEntity<?> getUserLikeName(
-        @PathVariable
-            String userName)
+    public ResponseEntity<?> getUserLikeName(@PathVariable String userName)
     {
         List<User> u = userService.findByNameContaining(userName);
         return new ResponseEntity<>(u,
@@ -115,13 +109,8 @@ public class UserController
      * @throws URISyntaxException Exception if something does not work in creating the location header
      * @see UserService#save(User) UserService.save(User)
      */
-    @PostMapping(value = "/user",
-        consumes = "application/json")
-    public ResponseEntity<?> addNewUser(
-        @Valid
-        @RequestBody
-            User newuser) throws
-                          URISyntaxException
+    @PostMapping(value = "/user", consumes = "application/json")
+    public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
     {
         newuser.setUserid(0);
         newuser = userService.save(newuser);
@@ -134,9 +123,7 @@ public class UserController
             .toUri();
         responseHeaders.setLocation(newUserURI);
 
-        return new ResponseEntity<>(null,
-            responseHeaders,
-            HttpStatus.CREATED);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
     /**
@@ -152,14 +139,8 @@ public class UserController
      * @return status of OK
      * @see UserService#save(User) UserService.save(User)
      */
-    @PutMapping(value = "/user/{userid}",
-        consumes = "application/json")
-    public ResponseEntity<?> updateFullUser(
-        @Valid
-        @RequestBody
-            User updateUser,
-        @PathVariable
-            long userid)
+    @PutMapping(value = "/user/{userid}", consumes = "application/json")
+    public ResponseEntity<?> updateFullUser(@Valid @RequestBody User updateUser, @PathVariable long userid)
     {
         updateUser.setUserid(userid);
         userService.save(updateUser);
@@ -178,16 +159,10 @@ public class UserController
      * @return A status of OK
      * @see UserService#update(User, long) UserService.update(User, long)
      */
-    @PatchMapping(value = "/user/{id}",
-        consumes = "application/json")
-    public ResponseEntity<?> updateUser(
-        @RequestBody
-            User updateUser,
-        @PathVariable
-            long id)
+    @PatchMapping(value = "/user/{id}", consumes = "application/json")
+    public ResponseEntity<?> updateUser(@RequestBody User updateUser, @PathVariable long id)
     {
-        userService.update(updateUser,
-            id);
+        userService.update(updateUser, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -200,9 +175,7 @@ public class UserController
      */
     @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/user/{id}")
-    public ResponseEntity<?> deleteUserById(
-        @PathVariable
-            long id)
+    public ResponseEntity<?> deleteUserById(@PathVariable long id)
     {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -223,4 +196,12 @@ public class UserController
         return new ResponseEntity<>(u,
             HttpStatus.OK);
     }
+    // Added by KM - this will return all the applications of a particular user - TODO 
+//    @GetMapping(value = "/user/{id}/apps", produces = {"application/json"})
+//    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
+//    {
+//        User u = userService.findByName(authentication.getName());
+//        return new ResponseEntity<>(u,
+//            HttpStatus.OK);
+//    }
 }

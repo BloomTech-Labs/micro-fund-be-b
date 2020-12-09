@@ -57,8 +57,7 @@ public class User extends Auditable
     @ManyToMany()
     @JoinTable(name = "userorganizations", joinColumns = @JoinColumn(name = "userid"),
         inverseJoinColumns = @JoinColumn(name = "orgid"))
-    @JsonIgnoreProperties(value = "users",
-        allowSetters = true)
+    @JsonIgnoreProperties(value = "users", allowSetters = true)
     List<Organization> organizations = new ArrayList<>();
 
     //applications - KM (one user can submit many applications)
