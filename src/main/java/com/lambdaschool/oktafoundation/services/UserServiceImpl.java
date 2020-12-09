@@ -126,10 +126,27 @@ public class UserServiceImpl
 
         newUser.setDescription(user.getDescription());
 
+        /**
+         * Save feature for organizations and applications (SFritz)
+         */
         newUser.getOrganizations().clear();
         for (Organization og : user.getOrganizations())
         {
+            newUser.getOrganizations()
+                    .add(new Organization(og.getName(),
+                            og.getAddress(),
+                            og.getPhone()));
+        }
 
+        newUser.getApplications().clear();
+        for (Application ap : user.getApplications())
+        {
+            newUser.getApplications()
+                    .add(new Application(ap.getName(),
+                            ap.getAddress(),
+                            ap.getPhone(),
+                            ap.getReason(),
+                            ap.getStatus()));
         }
 
         return userrepos.save(newUser);
@@ -203,6 +220,32 @@ public class UserServiceImpl
             if (user.getDescription() != null)
             {
                 currentUser.setDescription(user.getDescription());
+            }
+
+            if (user.getOrganizations().size() > 0)
+            {
+                currentUser.getOrganizations().clear();
+                for (Organization og : user.getOrganizations())
+                {
+                    currentUser.getOrganizations()
+                            .add(new Organization(og.getName(),
+                                    og.getAddress(),
+                                    og.getPhone()));
+                }
+            }
+
+            if (user.getApplications().size() > 0)
+            {
+                currentUser.getApplications().clear();
+                for (Application ap : user.getApplications())
+                {
+                    currentUser.getApplications()
+                            .add(new Application(ap.getName(),
+                                    ap.getAddress(),
+                                    ap.getPhone(),
+                                    ap.getReason(),
+                                    ap.getStatus()));
+                }
             }
 
             return userrepos.save(currentUser);
