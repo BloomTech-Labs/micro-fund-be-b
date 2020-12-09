@@ -1,10 +1,7 @@
 package com.lambdaschool.oktafoundation.services;
 
 import com.lambdaschool.oktafoundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.oktafoundation.models.Role;
-import com.lambdaschool.oktafoundation.models.User;
-import com.lambdaschool.oktafoundation.models.UserRoles;
-import com.lambdaschool.oktafoundation.models.Useremail;
+import com.lambdaschool.oktafoundation.models.*;
 import com.lambdaschool.oktafoundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -129,6 +126,12 @@ public class UserServiceImpl
 
         newUser.setDescription(user.getDescription());
 
+        newUser.getOrganizations().clear();
+        for (Organization og : user.getOrganizations())
+        {
+
+        }
+
         return userrepos.save(newUser);
     }
 
@@ -177,6 +180,29 @@ public class UserServiceImpl
                         .add(new Useremail(currentUser,
                             ue.getUseremail()));
                 }
+            }
+
+            /**
+             * New stuff added by SFritz
+             */
+            if (user.getAddress() != null)
+            {
+                currentUser.setAddress(user.getAddress());
+            }
+
+            if (user.getPhone() != null)
+            {
+                currentUser.setPhone(user.getPhone());
+            }
+
+            if (user.getImageUrl() != null)
+            {
+                currentUser.setImageUrl(user.getImageUrl());
+            }
+
+            if (user.getDescription() != null)
+            {
+                currentUser.setDescription(user.getDescription());
             }
 
             return userrepos.save(currentUser);
