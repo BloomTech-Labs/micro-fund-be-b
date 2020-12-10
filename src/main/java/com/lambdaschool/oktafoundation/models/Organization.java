@@ -26,8 +26,6 @@ public class Organization extends Auditable
     @JsonIgnoreProperties(value = "organization", allowSetters = true)
     private List<Application> applications = new ArrayList<>();
 
-
-
     // tying organization to users - KM
     @ManyToMany(mappedBy = "organizations")
     @JsonIgnoreProperties(value = "organizations", allowSetters = true)

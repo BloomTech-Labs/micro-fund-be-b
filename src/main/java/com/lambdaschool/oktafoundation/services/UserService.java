@@ -71,9 +71,7 @@ public interface UserService
      * @param id   The primary key (long) of the user to update
      * @return the complete user object that got updated
      */
-    User update(
-        User user,
-        long id);
+    User update(User user, long id);
 
     /**
      * Deletes all record and their associated records from the database

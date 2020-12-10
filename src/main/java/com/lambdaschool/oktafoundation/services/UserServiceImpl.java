@@ -1,10 +1,7 @@
 package com.lambdaschool.oktafoundation.services;
 
 import com.lambdaschool.oktafoundation.exceptions.ResourceNotFoundException;
-import com.lambdaschool.oktafoundation.models.Role;
-import com.lambdaschool.oktafoundation.models.User;
-import com.lambdaschool.oktafoundation.models.UserRoles;
-import com.lambdaschool.oktafoundation.models.Useremail;
+import com.lambdaschool.oktafoundation.models.*;
 import com.lambdaschool.oktafoundation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +15,7 @@ import java.util.List;
  */
 @Transactional
 @Service(value = "userService")
-public class UserServiceImpl
-    implements UserService
+public class UserServiceImpl implements UserService
 {
     /**
      * Connects this service to the User table.
@@ -129,6 +125,29 @@ public class UserServiceImpl
 
         newUser.setDescription(user.getDescription());
 
+        /**
+         * Save feature for organizations and applications (SFritz)
+         */
+        newUser.getOrganizations().clear();
+        for (Organization og : user.getOrganizations())
+        {
+            newUser.getOrganizations()
+                    .add(new Organization(og.getName(),
+                            og.getAddress(),
+                            og.getPhone()));
+        }
+
+        newUser.getApplications().clear();
+        for (Application ap : user.getApplications())
+        {
+            newUser.getApplications()
+                    .add(new Application(ap.getName(),
+                            ap.getAddress(),
+                            ap.getPhone(),
+                            ap.getReason(),
+                            ap.getStatus()));
+        }
+
         return userrepos.save(newUser);
     }
 
@@ -176,6 +195,55 @@ public class UserServiceImpl
                     currentUser.getUseremails()
                         .add(new Useremail(currentUser,
                             ue.getUseremail()));
+                }
+            }
+
+            /**
+             * New stuff added by SFritz
+             */
+            if (user.getAddress() != null)
+            {
+                currentUser.setAddress(user.getAddress());
+            }
+
+            if (user.getPhone() != null)
+            {
+                currentUser.setPhone(user.getPhone());
+            }
+
+            if (user.getImageUrl() != null)
+            {
+                currentUser.setImageUrl(user.getImageUrl());
+            }
+
+            if (user.getDescription() != null)
+            {
+                currentUser.setDescription(user.getDescription());
+            }
+
+            if (user.getOrganizations().size() > 0)
+            {
+                currentUser.getOrganizations().clear();
+                for (Organization og : user.getOrganizations())
+                {
+                    currentUser.getOrganizations()
+                            .add(new Organization(og.getName(),
+                                    og.getAddress(),
+                                    og.getPhone()));
+                }
+            }
+
+            if (user.getApplications().size() > 0)
+            {
+                currentUser.getApplications().clear();
+                for (Application ap : user.getApplications())
+                {
+                    currentUser.getApplications()
+                            .add(new Application(ap.getName(),
+                                    ap.getAddress(),
+                                    ap.getPhone(),
+                                    ap.getReason(),
+                                    ap.getStatus()));
                 }
             }
 

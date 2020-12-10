@@ -41,8 +41,7 @@ public class SeedData implements CommandLineRunner
      */
     @Transactional
     @Override
-    public void run(String[] args) throws
-                                   Exception
+    public void run(String[] args) throws Exception
     {
         roleService.deleteAll();
         Role r1 = new Role("admin");
