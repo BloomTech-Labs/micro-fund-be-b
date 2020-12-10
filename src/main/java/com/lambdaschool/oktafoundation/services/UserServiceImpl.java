@@ -15,8 +15,7 @@ import java.util.List;
  */
 @Transactional
 @Service(value = "userService")
-public class UserServiceImpl
-    implements UserService
+public class UserServiceImpl implements UserService
 {
     /**
      * Connects this service to the User table.
