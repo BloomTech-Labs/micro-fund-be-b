@@ -1,0 +1,5 @@
+com\lambdaschool\oktafoundation\services\UserServiceImplTest.class
+com\lambdaschool\oktafoundation\controllers\UserControllerUnitTest.class
+com\lambdaschool\oktafoundation\OktaFoundationApplication.class
+com\lambdaschool\oktafoundation\controllers\UserControllerIntegrationTest.class
+com\lambdaschool\oktafoundation\SeedData.class

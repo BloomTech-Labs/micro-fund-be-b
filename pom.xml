@@ -117,7 +117,7 @@
     </dependencies>
 
     <build>
-        <finalName>jrmmba-oktafoundation</finalName>
+        <finalName>microfund-b</finalName>
 
         <plugins>
             <plugin>
