@@ -3,12 +3,15 @@ package com.lambdaschool.oktafoundation.controllers;
 import com.lambdaschool.oktafoundation.models.Organization;
 import com.lambdaschool.oktafoundation.services.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -62,6 +65,22 @@ public class OrganizationController
         {
             orgService.update(updateOrg, id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        @PostMapping(value = "/org", consumes = "application/json")
+        public ResponseEntity<?> addNewOrg(@Valid @RequestBody Organization neworg) throws URISyntaxException
+        {
+            neworg.setOrgid(0);
+            neworg = orgService.save(neworg);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            URI newOrgURI = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{orgid}")
+                    .buildAndExpand(neworg.getOrgid())
+                    .toUri();
+            responseHeaders.setLocation(newOrgURI);
+
+            return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
         }
  }
 

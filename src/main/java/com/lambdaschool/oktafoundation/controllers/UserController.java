@@ -195,12 +195,11 @@ public class UserController
         User u = userService.findByName(authentication.getName());
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
-    // Added by KM - this will return all the applications of a particular user - TODO
-    //    @GetMapping(value = "/user/{id}/apps", produces = {"application/json"})
-    //    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
-    //    {
-    //        User u = userService.findByName(authentication.getName());
-    //        return new ResponseEntity<>(u,
-    //            HttpStatus.OK);
-    //    }
+
+    @GetMapping(value = "/user/{id}/apps", produces = "application/json")
+    public ResponseEntity<?> getUserApps(@PathVariable long id)
+    {
+        User u = userService.findUserById(id);
+        return new ResponseEntity<>(u.getApplications(), HttpStatus.OK);
+    }
 }
