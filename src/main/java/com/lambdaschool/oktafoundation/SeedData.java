@@ -1,6 +1,8 @@
 package com.lambdaschool.oktafoundation;
 
 import com.lambdaschool.oktafoundation.models.Role;
+import com.lambdaschool.oktafoundation.models.User;
+import com.lambdaschool.oktafoundation.models.UserRoles;
 import com.lambdaschool.oktafoundation.services.RoleService;
 import com.lambdaschool.oktafoundation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,7 @@ public class SeedData implements CommandLineRunner
     @Override
     public void run(String[] args) throws Exception
     {
+        userService.deleteAll();
         roleService.deleteAll();
         Role r1 = new Role("admin");
         Role r2 = new Role("user");
@@ -76,5 +79,14 @@ public class SeedData implements CommandLineRunner
 
         userService.save(u1);
         */
+        User u1 = new User("admin@lambdaschool.local");
+        u1.getRoles().add(new UserRoles(u1, r1));
+        User u2 = new User("coolorg@lambdaschool.local");
+        u2.getRoles().add(new UserRoles(u2, r2));
+        User u3 = new User("evencoolerorg@lambdaschool.local");
+        u3.getRoles().add(new UserRoles(u3, r3));
+        userService.save(u1);
+        userService.save(u2);
+        userService.save(u3);
     }
 }
