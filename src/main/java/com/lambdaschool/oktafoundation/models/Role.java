@@ -33,11 +33,8 @@ public class Role extends Auditable
      * Part of the join relationship between user and role
      * connects roles to the user role combination
      */
-    @OneToMany(mappedBy = "role",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-    @JsonIgnoreProperties(value = "role",
-        allowSetters = true)
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "role", allowSetters = true)
     private Set<UserRoles> users = new HashSet<>();
 
     /**

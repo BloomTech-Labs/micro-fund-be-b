@@ -4,6 +4,7 @@ import com.lambdaschool.oktafoundation.exceptions.ResourceNotFoundException;
 import com.lambdaschool.oktafoundation.models.Application;
 import com.lambdaschool.oktafoundation.models.Organization;
 import com.lambdaschool.oktafoundation.models.User;
+import com.lambdaschool.oktafoundation.repository.ApplicationRepository;
 import com.lambdaschool.oktafoundation.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class OrganizationServiceImpl implements OrganizationService
 {
     @Autowired
     private OrganizationRepository orgrepos;
+
 
     @Autowired
     private HelperFunctions helperFunctions;
@@ -46,7 +48,6 @@ public class OrganizationServiceImpl implements OrganizationService
     }
 
     @Transactional
-
     @Override
     public Organization save(Organization organization)
     {
@@ -66,14 +67,20 @@ public class OrganizationServiceImpl implements OrganizationService
         newOrg.setPhone(organization.getPhone());
 
         newOrg.getApplications().clear();
+
+//        for (Application ap : organization.getApplications())
+//        {
+//            newOrg.getApplications().add(new Application(ap.getName(),ap.getAddress(), ap.getPhone(), ap.getReason(),
+//                            ap.getStatus()),
+//                            ap.getOrganization(), ap.getUser());
+//        }
         for (Application ap : organization.getApplications())
         {
-            newOrg.getApplications()
-                    .add(new Application(ap.getName(),
-                            ap.getAddress(),
-                            ap.getPhone(),
-                            ap.getReason(),
-                            ap.getStatus()));
+            newOrg.getApplications().add(new Application(ap.getName(),
+                ap.getAddress(), ap.getPhone(),
+                ap.getReason(),
+                ap.getStatus(), newOrg,
+                ap.getUser()));
         }
 
         newOrg.getUsers().clear();
@@ -113,12 +120,18 @@ public class OrganizationServiceImpl implements OrganizationService
             currentOrg.getApplications().clear();
             for (Application ap : organization.getApplications())
             {
-                currentOrg.getApplications()
-                        .add(new Application(ap.getName(),
-                                ap.getAddress(),
-                                ap.getPhone(),
-                                ap.getReason(),
-                                ap.getStatus()));
+//                currentOrg.getApplications()
+//                        .add(new Application(ap.getName(),
+//                                ap.getAddress(),
+//                                ap.getPhone(),
+//                                ap.getReason(),
+//                                ap.getStatus()));
+
+                currentOrg.getApplications().add(new Application(ap.getName(),
+                    ap.getAddress(), ap.getPhone(),
+                    ap.getReason(),
+                    ap.getStatus(), currentOrg,
+                    ap.getUser()));
             }
         }
 
