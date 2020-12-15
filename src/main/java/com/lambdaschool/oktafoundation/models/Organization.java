@@ -104,5 +104,12 @@ public class Organization extends Auditable
         this.users = users;
     }
 
+    // - Added by KM - 12/14/2020
+    public void addUser(User user)
+    {
+        users.add(user);
+        user.getOrganizations().add(this);
+    }
+
 
 }

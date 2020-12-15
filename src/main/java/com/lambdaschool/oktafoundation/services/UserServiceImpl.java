@@ -30,6 +30,9 @@ public class UserServiceImpl implements UserService
     private RoleService roleService;
 
     @Autowired
+    private OrganizationService organizationService;
+
+    @Autowired
     private HelperFunctions helperFunctions;
 
     public User findUserById(long id) throws
@@ -131,21 +134,31 @@ public class UserServiceImpl implements UserService
         newUser.getOrganizations().clear();
         for (Organization og : user.getOrganizations())
         {
-            newUser.getOrganizations()
-                    .add(new Organization(og.getName(),
-                            og.getAddress(),
-                            og.getPhone()));
+            Organization newOrg = organizationService.findOrgById(og.getOrgid());
+
+            newUser.addOrganization(newOrg);
+            //altered by KM - 12/14/2020
+//            newUser.getOrganizations()
+//                    .add(new Organization(og.getName(),
+//                            og.getAddress(),
+//                            og.getPhone()));
         }
 
         newUser.getApplications().clear();
         for (Application ap : user.getApplications())
         {
-            newUser.getApplications()
-                    .add(new Application(ap.getName(),
-                            ap.getAddress(),
-                            ap.getPhone(),
-                            ap.getReason(),
-                            ap.getStatus()));
+            //altered by KM - 12/14/2020
+//            newUser.getApplications()
+//                    .add(new Application(ap.getName(),
+//                            ap.getAddress(),
+//                            ap.getPhone(),
+//                            ap.getReason(),
+//                            ap.getStatus()));
+            newUser.getApplications().add(new Application(ap.getName(),
+                ap.getAddress(), ap.getPhone(),
+                ap.getReason(),
+                ap.getStatus(), ap.getOrganization(),
+                newUser));
         }
 
         return userrepos.save(newUser);
@@ -224,13 +237,23 @@ public class UserServiceImpl implements UserService
             if (user.getOrganizations().size() > 0)
             {
                 currentUser.getOrganizations().clear();
+
                 for (Organization og : user.getOrganizations())
                 {
-                    currentUser.getOrganizations()
-                            .add(new Organization(og.getName(),
-                                    og.getAddress(),
-                                    og.getPhone()));
+                    Organization newOrg = organizationService.findOrgById(og.getOrgid());
+
+                    currentUser.addOrganization(newOrg);
+
                 }
+
+                //altered by KM - 12/14/2020
+//                for (Organization og : user.getOrganizations())
+//                {
+//                    currentUser.getOrganizations()
+//                            .add(new Organization(og.getName(),
+//                                    og.getAddress(),
+//                                    og.getPhone()));
+//                }
             }
 
             if (user.getApplications().size() > 0)
@@ -238,12 +261,17 @@ public class UserServiceImpl implements UserService
                 currentUser.getApplications().clear();
                 for (Application ap : user.getApplications())
                 {
-                    currentUser.getApplications()
-                            .add(new Application(ap.getName(),
-                                    ap.getAddress(),
-                                    ap.getPhone(),
-                                    ap.getReason(),
-                                    ap.getStatus()));
+//                    currentUser.getApplications()
+//                            .add(new Application(ap.getName(),
+//                                    ap.getAddress(),
+//                                    ap.getPhone(),
+//                                    ap.getReason(),
+//                                    ap.getStatus()));
+                    currentUser.getApplications().add(new Application(ap.getName(),
+                        ap.getAddress(), ap.getPhone(),
+                        ap.getReason(),
+                        ap.getStatus(), ap.getOrganization(),
+                        currentUser));
                 }
             }
 
