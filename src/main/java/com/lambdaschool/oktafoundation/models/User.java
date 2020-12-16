@@ -226,7 +226,12 @@ public class User extends Auditable
         this.organizations = organizations;
     }
 
-
+    public void addOrganization(Organization organization)
+    {
+        organizations.add(organization);
+        organization.getUsers()
+            .add(this);
+    }
 
     /**
      * Internally, user security requires a list of authorities, roles, that the user has. This method is a simple way to provide those.

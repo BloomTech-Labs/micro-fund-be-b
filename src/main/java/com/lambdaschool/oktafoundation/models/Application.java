@@ -20,29 +20,34 @@ public class Application extends Auditable
 
     @ManyToOne
     @JoinColumn(name = "orgid", nullable = false)
-    @JsonIgnoreProperties(value = "applications", allowSetters = true)
+    @JsonIgnoreProperties(value = {"applications","users"}, allowSetters = true)
     private Organization organization;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    @JsonIgnoreProperties(value = "applications", allowSetters = true)
+    @JsonIgnoreProperties(value = {"applications","organizations"}, allowSetters = true)
     private User user;
 
     public Application()
     {
     }
 
-    public Application(String name,
-                       String address,
-                       String phone,
-                       String reason,
-                       String status)
+    public Application(
+        String name,
+        String address,
+        String phone,
+        String reason,
+        String status,
+        Organization organization,
+        User user)
     {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.reason = reason;
         this.status = status;
+        this.organization = organization;
+        this.user = user;
     }
 
     public long getAppid()

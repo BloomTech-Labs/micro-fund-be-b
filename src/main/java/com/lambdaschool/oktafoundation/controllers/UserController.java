@@ -70,11 +70,8 @@ public class UserController
      * @see UserService#findByName(String) UserService.findByName(String)
      */
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping(value = "/user/name/{userName}",
-        produces = "application/json")
-    public ResponseEntity<?> getUserByName(
-        @PathVariable
-            String userName)
+    @GetMapping(value = "/user/name/{userName}", produces = "application/json")
+    public ResponseEntity<?> getUserByName(@PathVariable String userName)
     {
         User u = userService.findByName(userName);
         return new ResponseEntity<>(u, HttpStatus.OK);
