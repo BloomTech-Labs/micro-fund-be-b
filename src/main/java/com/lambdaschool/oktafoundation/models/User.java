@@ -163,7 +163,7 @@ public class User extends Auditable
      */
     public void setUsername(String username)
     {
-        this.username = username.toLowerCase();
+        this.username = username;
     }
 
     /**

@@ -36,7 +36,7 @@ public class UserController
      * @see UserService#findAll() UserService.findAll()
      */
     // KM changes - changed value from users to all - may need to adjust authorization
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<?> listAllUsers()
     {
@@ -188,7 +188,8 @@ public class UserController
      */
     @GetMapping(value = "/getuserinfo", produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
-    {
+    {   System.out.println("THIS IS AUTH "+authentication);
+        System.out.println("This is auth.getname" + authentication.getName());
         User u = userService.findByName(authentication.getName());
         return new ResponseEntity<>(u, HttpStatus.OK);
     }

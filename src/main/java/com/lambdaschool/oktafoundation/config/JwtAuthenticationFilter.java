@@ -41,11 +41,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         FilterChain filterChain) throws ServletException, IOException
     {
         // find the username of the authenticated user
-        Authentication authentication = SecurityContextHolder.getContext()
-            .getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {
+            System.out.println("Inside JWT AUTH Filter "+authentication.getName());
             if (userrepos.findByUsername(authentication.getName()) == null)
             {
                 User newUser = new User(authentication.getName());

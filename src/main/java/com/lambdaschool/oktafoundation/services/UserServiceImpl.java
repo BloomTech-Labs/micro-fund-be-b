@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService
     public List<User> findByNameContaining(String username)
     {
 
-        return userrepos.findByUsernameContainingIgnoreCase(username.toLowerCase());
+        return userrepos.findByUsernameContainingIgnoreCase(username);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService
     @Override
     public User findByName(String username)
     {
-        User uu = userrepos.findByUsername(username.toLowerCase());
+        User uu = userrepos.findByUsername(username);
         if (uu == null)
         {
             throw new ResourceNotFoundException("Username " + username + " not found!");
@@ -97,8 +97,7 @@ public class UserServiceImpl implements UserService
             newUser.setUserid(user.getUserid());
         }
 
-        newUser.setUsername(user.getUsername()
-            .toLowerCase());
+        newUser.setUsername(user.getUsername());
 
         newUser.getRoles()
             .clear();
@@ -178,8 +177,7 @@ public class UserServiceImpl implements UserService
         {
             if (user.getUsername() != null)
             {
-                currentUser.setUsername(user.getUsername()
-                    .toLowerCase());
+                currentUser.setUsername(user.getUsername());
             }
 
             if (user.getRoles()

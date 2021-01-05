@@ -1,6 +1,7 @@
 package com.lambdaschool.oktafoundation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
@@ -18,6 +19,7 @@ public class OktaFoundationApplication
      */
     @Autowired
     private static Environment env;
+
 
     /**
      * If an environment variable is not found, set this to true
@@ -45,6 +47,7 @@ public class OktaFoundationApplication
      */
     public static void main(String[] args)
     {
+
         SpringApplication.run(OktaFoundationApplication.class,
             args);
     }
