@@ -10,6 +10,10 @@
 
 Microfund API is built using Java Spring. It provides endpoints for the front-end client to read various data sets contained in the application's data.
 
+## Documentation Video
+
+https://youtu.be/I_OjgwKNQdI
+
 ### Database layout
 
 Microfund is currently using this database layout. 
