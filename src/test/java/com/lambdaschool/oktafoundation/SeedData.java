@@ -50,8 +50,7 @@ public class SeedData
      */
     @Transactional
     @Override
-    public void run(String[] args) throws
-                                   Exception
+    public void run(String[] args) throws Exception
     {
         userService.deleteAll();
         roleService.deleteAll();

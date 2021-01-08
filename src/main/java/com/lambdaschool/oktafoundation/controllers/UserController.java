@@ -36,7 +36,7 @@ public class UserController
      * @see UserService#findAll() UserService.findAll()
      */
     // KM changes - changed value from users to all - may need to adjust authorization
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<?> listAllUsers()
     {
@@ -93,6 +93,29 @@ public class UserController
         List<User> u = userService.findByNameContaining(userName);
         return new ResponseEntity<>(u,
             HttpStatus.OK);
+    }
+
+    /**
+     * Returns the User record for the currently authenticated user based off of the supplied access token
+     * <br>Example: <a href="http://localhost:2019/users/getuserinfo">http://localhost:2019/users/getuserinfo</a>
+     *
+     * @param authentication The authenticated user object provided by Spring Security
+     * @return JSON of the current user. Status of OK
+     * @see UserService#findByName(String) UserService.findByName(authenticated user)
+     */
+    @GetMapping(value = "/getuserinfo", produces = {"application/json"})
+    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
+    {   System.out.println("THIS IS AUTH "+authentication);
+        System.out.println("This is auth.getname" + authentication.getName());
+        User u = userService.findByName(authentication.getName());
+        return new ResponseEntity<>(u, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/user/{id}/apps", produces = "application/json")
+    public ResponseEntity<?> getUserApps(@PathVariable long id)
+    {
+        User u = userService.findUserById(id);
+        return new ResponseEntity<>(u.getApplications(), HttpStatus.OK);
     }
 
     /**
@@ -178,25 +201,5 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * Returns the User record for the currently authenticated user based off of the supplied access token
-     * <br>Example: <a href="http://localhost:2019/users/getuserinfo">http://localhost:2019/users/getuserinfo</a>
-     *
-     * @param authentication The authenticated user object provided by Spring Security
-     * @return JSON of the current user. Status of OK
-     * @see UserService#findByName(String) UserService.findByName(authenticated user)
-     */
-    @GetMapping(value = "/getuserinfo", produces = {"application/json"})
-    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
-    {
-        User u = userService.findByName(authentication.getName());
-        return new ResponseEntity<>(u, HttpStatus.OK);
-    }
 
-    @GetMapping(value = "/user/{id}/apps", produces = "application/json")
-    public ResponseEntity<?> getUserApps(@PathVariable long id)
-    {
-        User u = userService.findUserById(id);
-        return new ResponseEntity<>(u.getApplications(), HttpStatus.OK);
-    }
 }

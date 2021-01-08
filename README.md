@@ -12,8 +12,12 @@ Microfund API is built using Java Spring. It provides endpoints for the front-en
 
 ### Database layout
 
-The table layout is similar to the initial version with the following exceptions:
+Microfund is currently using this database layout. 
 
+![Image of Microfund Database Layout](databaseschema.PNG)
+
+
+### Notes provided to us in the initial project scaffold
 * The join table userroles is explicitly created. This allows us to add additional columns to the join table
 * Since we are creating the join table ourselves, the Many to Many relationship that formed the join table is now two Many to One relationships
 * All tables now have audit fields
@@ -25,35 +29,536 @@ Thus the new table layout is as follows
 * Useremails have a Many-To-One relationship with User. Each User has many user email combinations. Each user email combination has only one User.
 * Roles have a Many-To-Many relationship with Users.
 
+### End Notes 
+#
+
+### This is the Database layout that was provided to us in the intial project scaffold
+
 ![Image of Database Layout](usersfinaldb.png)
+#
 
 Using the provided seed data, expand each endpoint below to see the output it generates.
 
 <details>
-<summary>http://localhost:2019/useremails/useremails</summary>
+Base API -
+<summary>https://microfund-b.herokuapp.com/users/all</summary>
 
 ```JSON
 [
     {
-        "useremailid": 5,
-        "useremail": "admin@email.local",
+        "userid": 7,
+        "username": "admin@lambdaschool.local",
+        "address": null,
+        "phone": null,
+        "imageUrl": null,
+        "description": null,
+        "useremails": [],
+        "roles": [
+            {
+                "role": {
+                    "roleid": 1,
+                    "name": "ADMIN"
+                }
+            }
+        ],
+        "organizations": [
+            {
+                "orgid": 4,
+                "name": "Organization 1",
+                "address": "456 greenville drive, longtucky, ark 80067",
+                "phone": "567-890-2234",
+                "applications": [
+                    {
+                        "appid": 9,
+                        "name": "Org 1",
+                        "address": "123 somewhere drive",
+                        "phone": "923-567-8965",
+                        "reason": "i want to help my community",
+                        "status": "not reviewed",
+                        "user": {
+                            "userid": 8,
+                            "username": "coolorg@lambdaschool.local",
+                            "address": null,
+                            "phone": null,
+                            "imageUrl": null,
+                            "description": null,
+                            "useremails": [],
+                            "roles": [
+                                {
+                                    "role": {
+                                        "roleid": 2,
+                                        "name": "USER"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "applications": []
+    }
+]
+```
+
+</details>
+
+<details>
+<summary>https://microfund-b.herokuapp.com/users/user/8</summary>
+
+```JSON
+{
+    "userid": 8,
+    "username": "coolorg@lambdaschool.local",
+    "address": null,
+    "phone": null,
+    "imageUrl": null,
+    "description": null,
+    "useremails": [],
+    "roles": [
+        {
+            "role": {
+                "roleid": 2,
+                "name": "USER"
+            }
+        }
+    ],
+    "organizations": [
+        {
+            "orgid": 5,
+            "name": "Organization 2",
+            "address": "4 takona lane, nashville, tn 12546",
+            "phone": "333-222-1111",
+            "applications": [
+                {
+                    "appid": 10,
+                    "name": "Org 2",
+                    "address": "124 rainbow lane",
+                    "phone": "444-111-3333",
+                    "reason": "i have a great idea i need help with",
+                    "status": "not reviewed",
+                    "user": {
+                        "userid": 8,
+                        "username": "coolorg@lambdaschool.local",
+                        "address": null,
+                        "phone": null,
+                        "imageUrl": null,
+                        "description": null,
+                        "useremails": [],
+                        "roles": [
+                            {
+                                "role": {
+                                    "roleid": 2,
+                                    "name": "USER"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "applications": [
+        {
+            "appid": 9,
+            "name": "Org 1",
+            "address": "123 somewhere drive",
+            "phone": "923-567-8965",
+            "reason": "i want to help my community",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 4,
+                "name": "Organization 1",
+                "address": "456 greenville drive, longtucky, ark 80067",
+                "phone": "567-890-2234"
+            }
+        },
+        {
+            "appid": 10,
+            "name": "Org 2",
+            "address": "124 rainbow lane",
+            "phone": "444-111-3333",
+            "reason": "i have a great idea i need help with",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 5,
+                "name": "Organization 2",
+                "address": "4 takona lane, nashville, tn 12546",
+                "phone": "333-222-1111"
+            }
+        }
+    ]
+}
+```
+
+</details>
+
+
+<details>
+<summary>https://microfund-b.herokuapp.com/users/user/name/coolorg@lambdaschool.local</summary>
+
+```JSON
+{
+    "userid": 8,
+    "username": "coolorg@lambdaschool.local",
+    "address": null,
+    "phone": null,
+    "imageUrl": null,
+    "description": null,
+    "useremails": [],
+    "roles": [
+        {
+            "role": {
+                "roleid": 2,
+                "name": "USER"
+            }
+        }
+    ],
+    "organizations": [
+        {
+            "orgid": 5,
+            "name": "Organization 2",
+            "address": "4 takona lane, nashville, tn 12546",
+            "phone": "333-222-1111",
+            "applications": [
+                {
+                    "appid": 10,
+                    "name": "Org 2",
+                    "address": "124 rainbow lane",
+                    "phone": "444-111-3333",
+                    "reason": "i have a great idea i need help with",
+                    "status": "not reviewed",
+                    "user": {
+                        "userid": 8,
+                        "username": "coolorg@lambdaschool.local",
+                        "address": null,
+                        "phone": null,
+                        "imageUrl": null,
+                        "description": null,
+                        "useremails": [],
+                        "roles": [
+                            {
+                                "role": {
+                                    "roleid": 2,
+                                    "name": "USER"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "applications": [
+        {
+            "appid": 9,
+            "name": "Org 1",
+            "address": "123 somewhere drive",
+            "phone": "923-567-8965",
+            "reason": "i want to help my community",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 4,
+                "name": "Organization 1",
+                "address": "456 greenville drive, longtucky, ark 80067",
+                "phone": "567-890-2234"
+            }
+        },
+        {
+            "appid": 10,
+            "name": "Org 2",
+            "address": "124 rainbow lane",
+            "phone": "444-111-3333",
+            "reason": "i have a great idea i need help with",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 5,
+                "name": "Organization 2",
+                "address": "4 takona lane, nashville, tn 12546",
+                "phone": "333-222-1111"
+            }
+        }
+    ]
+}
+```
+
+</details>
+<details>
+<summary>https://microfund-b.herokuapp.com/users/user/name/like/cool</summary>
+
+```JSON
+[
+    {
+        "userid": 8,
+        "username": "coolorg@lambdaschool.local",
+        "address": null,
+        "phone": null,
+        "imageUrl": null,
+        "description": null,
+        "useremails": [],
+        "roles": [
+            {
+                "role": {
+                    "roleid": 2,
+                    "name": "USER"
+                }
+            }
+        ],
+        "organizations": [
+            {
+                "orgid": 5,
+                "name": "Organization 2",
+                "address": "4 takona lane, nashville, tn 12546",
+                "phone": "333-222-1111",
+                "applications": [
+                    {
+                        "appid": 10,
+                        "name": "Org 2",
+                        "address": "124 rainbow lane",
+                        "phone": "444-111-3333",
+                        "reason": "i have a great idea i need help with",
+                        "status": "not reviewed",
+                        "user": {
+                            "userid": 8,
+                            "username": "coolorg@lambdaschool.local",
+                            "address": null,
+                            "phone": null,
+                            "imageUrl": null,
+                            "description": null,
+                            "useremails": [],
+                            "roles": [
+                                {
+                                    "role": {
+                                        "roleid": 2,
+                                        "name": "USER"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "applications": [
+            {
+                "appid": 9,
+                "name": "Org 1",
+                "address": "123 somewhere drive",
+                "phone": "923-567-8965",
+                "reason": "i want to help my community",
+                "status": "not reviewed",
+                "organization": {
+                    "orgid": 4,
+                    "name": "Organization 1",
+                    "address": "456 greenville drive, longtucky, ark 80067",
+                    "phone": "567-890-2234"
+                }
+            },
+            {
+                "appid": 10,
+                "name": "Org 2",
+                "address": "124 rainbow lane",
+                "phone": "444-111-3333",
+                "reason": "i have a great idea i need help with",
+                "status": "not reviewed",
+                "organization": {
+                    "orgid": 5,
+                    "name": "Organization 2",
+                    "address": "4 takona lane, nashville, tn 12546",
+                    "phone": "333-222-1111"
+                }
+            }
+        ]
+    },
+    {
+        "userid": 11,
+        "username": "evencoolerorg@lambdaschool.local",
+        "address": null,
+        "phone": null,
+        "imageUrl": null,
+        "description": null,
+        "useremails": [],
+        "roles": [
+            {
+                "role": {
+                    "roleid": 3,
+                    "name": "PARTNER"
+                }
+            }
+        ],
+        "organizations": [
+            {
+                "orgid": 6,
+                "name": "Organization 3",
+                "address": "678 snowyhille crossing, boulder, c0 80053",
+                "phone": "888-999-1111",
+                "applications": [
+                    {
+                        "appid": 12,
+                        "name": "Org 3",
+                        "address": "534 abbey road",
+                        "phone": "000-345-9807",
+                        "reason": "i would love to be a part of this",
+                        "status": "not reviewed",
+                        "user": {
+                            "userid": 11,
+                            "username": "evencoolerorg@lambdaschool.local",
+                            "address": null,
+                            "phone": null,
+                            "imageUrl": null,
+                            "description": null,
+                            "useremails": [],
+                            "roles": [
+                                {
+                                    "role": {
+                                        "roleid": 3,
+                                        "name": "PARTNER"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "applications": [
+            {
+                "appid": 12,
+                "name": "Org 3",
+                "address": "534 abbey road",
+                "phone": "000-345-9807",
+                "reason": "i would love to be a part of this",
+                "status": "not reviewed",
+                "organization": {
+                    "orgid": 6,
+                    "name": "Organization 3",
+                    "address": "678 snowyhille crossing, boulder, c0 80053",
+                    "phone": "888-999-1111"
+                }
+            }
+        ]
+    }
+]
+```
+</details>
+<details>
+<summary>https://microfund-b.herokuapp.com/users/getuserinfo</summary>
+
+```JSON
+{
+    "userid": 8,
+    "username": "coolorg@lambdaschool.local",
+    "address": null,
+    "phone": null,
+    "imageUrl": null,
+    "description": null,
+    "useremails": [],
+    "roles": [
+        {
+            "role": {
+                "roleid": 2,
+                "name": "USER"
+            }
+        }
+    ],
+    "organizations": [
+        {
+            "orgid": 5,
+            "name": "Organization 2",
+            "address": "4 takona lane, nashville, tn 12546",
+            "phone": "333-222-1111",
+            "applications": [
+                {
+                    "appid": 10,
+                    "name": "Org 2",
+                    "address": "124 rainbow lane",
+                    "phone": "444-111-3333",
+                    "reason": "i have a great idea i need help with",
+                    "status": "not reviewed",
+                    "user": {
+                        "userid": 8,
+                        "username": "coolorg@lambdaschool.local",
+                        "address": null,
+                        "phone": null,
+                        "imageUrl": null,
+                        "description": null,
+                        "useremails": [],
+                        "roles": [
+                            {
+                                "role": {
+                                    "roleid": 2,
+                                    "name": "USER"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "applications": [
+        {
+            "appid": 9,
+            "name": "Org 1",
+            "address": "123 somewhere drive",
+            "phone": "923-567-8965",
+            "reason": "i want to help my community",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 4,
+                "name": "Organization 1",
+                "address": "456 greenville drive, longtucky, ark 80067",
+                "phone": "567-890-2234"
+            }
+        },
+        {
+            "appid": 10,
+            "name": "Org 2",
+            "address": "124 rainbow lane",
+            "phone": "444-111-3333",
+            "reason": "i have a great idea i need help with",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 5,
+                "name": "Organization 2",
+                "address": "4 takona lane, nashville, tn 12546",
+                "phone": "333-222-1111"
+            }
+        }
+    ]
+}
+
+```
+
+</details>
+
+<details>
+<summary>https://microfund-b.herokuapp.com/users/user/8/apps</summary>
+
+```JSON
+[
+    {
+        "appid": 9,
+        "name": "Org 1",
+        "address": "123 somewhere drive",
+        "phone": "923-567-8965",
+        "reason": "i want to help my community",
+        "status": "not reviewed",
+        "organization": {
+            "orgid": 4,
+            "name": "Organization 1",
+            "address": "456 greenville drive, longtucky, ark 80067",
+            "phone": "567-890-2234"
+        },
         "user": {
-            "userid": 4,
-            "username": "admin",
-            "primaryemail": "admin@lambdaschool.local",
+            "userid": 8,
+            "username": "coolorg@lambdaschool.local",
+            "address": null,
+            "phone": null,
+            "imageUrl": null,
+            "description": null,
+            "useremails": [],
             "roles": [
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 1,
-                        "name": "ADMIN"
-                    }
-                },
                 {
                     "role": {
                         "roleid": 2,
@@ -64,110 +569,26 @@ Using the provided seed data, expand each endpoint below to see the output it ge
         }
     },
     {
-        "useremailid": 6,
-        "useremail": "admin@mymail.local",
+        "appid": 10,
+        "name": "Org 2",
+        "address": "124 rainbow lane",
+        "phone": "444-111-3333",
+        "reason": "i have a great idea i need help with",
+        "status": "not reviewed",
+        "organization": {
+            "orgid": 5,
+            "name": "Organization 2",
+            "address": "4 takona lane, nashville, tn 12546",
+            "phone": "333-222-1111"
+        },
         "user": {
-            "userid": 4,
-            "username": "admin",
-            "primaryemail": "admin@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 1,
-                        "name": "ADMIN"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "useremailid": 8,
-        "useremail": "cinnamon@mymail.local",
-        "user": {
-            "userid": 7,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "useremailid": 9,
-        "useremail": "hops@mymail.local",
-        "user": {
-            "userid": 7,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "useremailid": 10,
-        "useremail": "bunny@email.local",
-        "user": {
-            "userid": 7,
-            "username": "cinnamon",
-            "primaryemail": "cinnamon@lambdaschool.local",
-            "roles": [
-                {
-                    "role": {
-                        "roleid": 2,
-                        "name": "USER"
-                    }
-                },
-                {
-                    "role": {
-                        "roleid": 3,
-                        "name": "DATA"
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "useremailid": 12,
-        "useremail": "barnbarn@email.local",
-        "user": {
-            "userid": 11,
-            "username": "barnbarn",
-            "primaryemail": "barnbarn@lambdaschool.local",
+            "userid": 8,
+            "username": "coolorg@lambdaschool.local",
+            "address": null,
+            "phone": null,
+            "imageUrl": null,
+            "description": null,
+            "useremails": [],
             "roles": [
                 {
                     "role": {
@@ -179,43 +600,148 @@ Using the provided seed data, expand each endpoint below to see the output it ge
         }
     }
 ]
+
 ```
 
 </details>
 
+
+##### Currently, the way Okta is setup and implemented, it would not allow the creation of new users from the front-end. 
 <details>
-<summary>http://localhost:2019/useremails/useremail/8</summary>
+<summary>POST https://microfund-b.herokuapp.com/users/user</summary>
+
+DATA
 
 ```JSON
 {
-    "useremailid": 8,
-    "useremail": "cinnamon@mymail.local",
-    "user": {
-        "userid": 7,
-        "username": "cinnamon",
-        "primaryemail": "cinnamon@lambdaschool.local",
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            },
-            {
-                "role": {
-                    "roleid": 3,
-                    "name": "DATA"
-                }
-            }
-        ]
-    }
+    "username":"NEWUSER"
 }
+```
+
+OUTPUT
+
+```TEXT
+Status CREATED
+```
+</details>
+
+
+<details>
+<summary>PUT https://microfund-b.herokuapp.com/users/user/8</summary>
+
+DATA
+
+```JSON
+{
+    "userid": 8,
+    "username": "coolorg@lambdaschool.local",
+    "address": "123 Here We Are Drive, School, Texas 95678",
+    "phone": null,
+    "imageUrl": null,
+    "description": null,
+    "useremails": [],
+    "roles": [
+        {
+            "role": {
+                "roleid": 2,
+                "name": "USER"
+            }
+        }
+    ],
+    "organizations": [
+        {
+            "orgid": 5,
+            "name": "Organization 2",
+            "address": "4 takona lane, nashville, tn 12546",
+            "phone": "333-222-1111",
+            "applications": [
+                {
+                    "appid": 10,
+                    "name": "Org 2",
+                    "address": "124 rainbow lane",
+                    "phone": "444-111-3333",
+                    "reason": "i have a great idea i need help with",
+                    "status": "not reviewed",
+                    "user": {
+                        "userid": 8,
+                        "username": "coolorg@lambdaschool.local",
+                        "address": null,
+                        "phone": null,
+                        "imageUrl": null,
+                        "description": null,
+                        "useremails": [],
+                        "roles": [
+                            {
+                                "role": {
+                                    "roleid": 2,
+                                    "name": "USER"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "applications": [
+        {
+            "appid": 9,
+            "name": "Org 1",
+            "address": "123 somewhere drive",
+            "phone": "923-567-8965",
+            "reason": "i want to help my community",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 4,
+                "name": "Organization 1",
+                "address": "456 greenville drive, longtucky, ark 80067",
+                "phone": "567-890-2234"
+            }
+        },
+        {
+            "appid": 10,
+            "name": "Org 2",
+            "address": "124 rainbow lane",
+            "phone": "444-111-3333",
+            "reason": "i have a great idea i need help with",
+            "status": "not reviewed",
+            "organization": {
+                "orgid": 5,
+                "name": "Organization 2",
+                "address": "4 takona lane, nashville, tn 12546",
+                "phone": "333-222-1111"
+            }
+        }
+    ]
+}
+```
+
+OUTPUT
+
+```TEXT
+Status OK
+```
+</details>
+
+<details>
+<summary>PATCH https://microfund-b.herokuapp.com/users/user/8</summary>
+
+DATA
+
+```JSON
+ {"phone": "333-200-1112"}
+```
+
+OUTPUT
+
+```TEXT
+Status OK
 ```
 
 </details>
 
 <details>
-<summary>DELETE http://localhost:2019/useremails/useremail/8</summary>
+<summary>DELETE https://microfund-b.herokuapp.com/users/user/8</summary>
 
 ```TEXT
 No Body Data
@@ -225,9 +751,174 @@ Status OK
 
 </details>
 
+---
+<details>
+<summary>https://microfund-b.herokuapp.com/apps/all</summary>
+
+```JSON
+[
+    {
+        "appid": 9,
+        "name": "Org 1",
+        "address": "123 somewhere drive",
+        "phone": "923-567-8965",
+        "reason": "i want to help my community",
+        "status": "not reviewed",
+        "organization": {
+            "orgid": 4,
+            "name": "Organization 1",
+            "address": "456 greenville drive, longtucky, ark 80067",
+            "phone": "567-890-2234"
+        },
+        "user": {
+            "userid": 8,
+            "username": "coolorg@lambdaschool.local",
+            "address": null,
+            "phone": null,
+            "imageUrl": null,
+            "description": null,
+            "useremails": [],
+            "roles": [
+                {
+                    "role": {
+                        "roleid": 2,
+                        "name": "USER"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "appid": 10,
+        "name": "Org 2",
+        "address": "124 rainbow lane",
+        "phone": "444-111-3333",
+        "reason": "i have a great idea i need help with",
+        "status": "not reviewed",
+        "organization": {
+            "orgid": 5,
+            "name": "Organization 2",
+            "address": "4 takona lane, nashville, tn 12546",
+            "phone": "333-222-1111"
+        },
+        "user": {
+            "userid": 8,
+            "username": "coolorg@lambdaschool.local",
+            "address": null,
+            "phone": null,
+            "imageUrl": null,
+            "description": null,
+            "useremails": [],
+            "roles": [
+                {
+                    "role": {
+                        "roleid": 2,
+                        "name": "USER"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "appid": 12,
+        "name": "Org 3",
+        "address": "534 abbey road",
+        "phone": "000-345-9807",
+        "reason": "i would love to be a part of this",
+        "status": "not reviewed",
+        "organization": {
+            "orgid": 6,
+            "name": "Organization 3",
+            "address": "678 snowyhille crossing, boulder, c0 80053",
+            "phone": "888-999-1111"
+        },
+        "user": {
+            "userid": 11,
+            "username": "evencoolerorg@lambdaschool.local",
+            "address": null,
+            "phone": null,
+            "imageUrl": null,
+            "description": null,
+            "useremails": [],
+            "roles": [
+                {
+                    "role": {
+                        "roleid": 3,
+                        "name": "PARTNER"
+                    }
+                }
+            ]
+        }
+    }
+]
+```
+
+</details>
 
 <details>
-<summary>PUT http://localhost:2019/useremails/useremail/9/email/favbun@hops.local</summary>
+<summary>https://microfund-b.herokuapp.com/apps/app/9</summary>
+
+```JSON
+
+```
+
+</details>
+
+<details>
+<summary>POST https://microfund-b.herokuapp.com/app/new</summary>
+
+DATA
+
+```JSON
+{
+"name": "New Micro-entrepenuer",
+"address": "543 Loveland Drive, Lindy, Texas 6789",
+"phone": "777-444-2222",
+"reason": "I've always wanted to start my own business",
+"status": "new",
+"organization": {
+                "orgid": 5,
+                "name": "Organization 2",
+                "address": "4 takona lane, nashville, tn 12546",
+                "phone": "333-222-1111"
+                },
+"user":{
+           "userid": 8,
+           "username": "coolorg@lambdaschool.local",
+           "address": "123 Here We Are Drive, School, Texas 95678",
+           "phone": null,
+           "imageUrl": null,
+           "description": null,
+           "useremails": [],
+           "roles": [
+               {
+                   "role": {
+                       "roleid": 2,
+                       "name": "USER"
+                   }
+               }
+           ]
+         }
+}
+```
+
+OUTPUT
+
+```TEXT
+Status CREATED
+```
+
+</details>
+
+<details>
+<summary>PATCH https://microfund-b.herokuapp.com/apps/app/9/status</summary>
+
+DATA
+
+```JSON
+{"status": "approved"}
+
+```
 
 OUTPUT
 
@@ -238,75 +929,104 @@ Status OK
 </details>
 
 <details>
-<summary>http://localhost:2019/useremails/useremail/9</summary>
+<summary>PATCH https://microfund-b.herokuapp.com/apps/app/9</summary>
+
+DATA
 
 ```JSON
-{
-    "useremailid": 9,
-    "useremail": "favbun@hops.local",
-    "user": {
-        "userid": 7,
-        "username": "cinnamon",
-        "primaryemail": "cinnamon@lambdaschool.local",
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            },
-            {
-                "role": {
-                    "roleid": 3,
-                    "name": "DATA"
-                }
-            }
-        ]
-    }
-}
+{"phone": "444-000-2222"}
 ```
-
-</details>
-
-<details>
-<summary>POST http://localhost:2019/useremails/user/14/email/favbun@hops.local</summary>
 
 OUTPUT
 
 ```TEXT
-Status CREATED
-
-Location Header: http://localhost:2019/useremails/useremail/15
-```
-
-</details>
-
-<details>
-<summary>http://localhost:2019/useremails/useremail/15</summary>
-
-```JSON
-{
-    "useremailid": 15,
-    "useremail": "favbun@hops.local",
-    "user": {
-        "userid": 14,
-        "username": "misskitty",
-        "primaryemail": "misskitty@school.lambda",
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            }
-        ]
-    }
-}
+Status OK
 ```
 
 </details>
 
 ---
+<details>
+<summary>https://microfund-b.herokuapp.com/orgs/all</summary>
+
+```JSON
+
+```
+
+</details>
+
+<details>
+<summary>https://microfund-b.herokuapp.com/orgs/org/9/users</summary>
+
+```JSON
+
+```
+
+</details>
+
+<details>
+<summary>https://microfund-b.herokuapp.com/orgs/org/9</summary>
+
+```JSON
+
+```
+
+</details>
+
+<details>
+<summary>https://microfund-b.herokuapp.com/orgs/org/9/apps</summary>
+
+```JSON
+
+```
+
+</details>
+
+<details>
+<summary>POST https://microfund-b.herokuapp.com/orgs/org</summary>
+
+DATA
+
+```JSON
+
+```
+
+OUTPUT
+
+```TEXT
+Status OK
+```
+
+</details>
+
+<details>
+<summary>PATCH https://microfund-b.herokuapp.com/orgs/org/9</summary>
+
+DATA
+
+```JSON
+
+```
+OUTPUT
+
+```TEXT
+Status OK
+```
+</details>
+
+<details>
+<summary>DELETE https://microfund-b.herokuapp.com/orgs/org/8</summary>
+
+```TEXT
+No Body Data
+
+Status OK
+```
+
+</details>
+
+---
+##### These endpoints were provided with the project scaffold. They have not been tested, altered or implemented in the front-end client at this time though the JSON input/output for each has changed/will need to change due to a change in the data models. Therefore, we are noting the endpoints but not the JSON object sent or returned because these will have changed/will need to change slightly. If you wish to implement any of these, we believe it would be fairly easy to do. 
 
 <details>
 <summary>http://localhost:2019/roles/roles</summary>
@@ -606,298 +1326,27 @@ Status OK
 
 ---
 
+##### These endpoints were provided with the project scaffold. They have not been tested, altered or implemented in the front-end client at this time though the JSON input/output for each has changed/will need to change due to a change in the data models. Therefore, we are noting the endpoints but not the JSON object sent or returned because these will have changed/will need to change slightly. If you wish to implement any of these, we believe it would be fairly easy to do. 
 <details>
-<summary>http://localhost:2019/users/users</summary>
+<summary>http://localhost:2019/useremails/useremails</summary>
 
 ```JSON
-[
-    {
-        "userid": 4,
-        "username": "admin",
-        "primaryemail": "admin@lambdaschool.local",
-        "useremails": [
-            {
-                "useremailid": 5,
-                "useremail": "admin@email.local"
-            },
-            {
-                "useremailid": 6,
-                "useremail": "admin@mymail.local"
-            }
-        ],
-        "roles": [
-            {
-                "role": {
-                    "roleid": 3,
-                    "name": "DATA"
-                }
-            },
-            {
-                "role": {
-                    "roleid": 1,
-                    "name": "ADMIN"
-                }
-            },
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            }
-        ]
-    },
-    {
-        "userid": 7,
-        "username": "cinnamon",
-        "primaryemail": "cinnamon@lambdaschool.local",
-        "useremails": [
-            {
-                "useremailid": 9,
-                "useremail": "favbun@hops.local"
-            },
-            {
-                "useremailid": 10,
-                "useremail": "bunny@email.local"
-            }
-        ],
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            },
-            {
-                "role": {
-                    "roleid": 3,
-                    "name": "DATA"
-                }
-            }
-        ]
-    },
-    {
-        "userid": 11,
-        "username": "barnbarn",
-        "primaryemail": "barnbarn@lambdaschool.local",
-        "useremails": [
-            {
-                "useremailid": 12,
-                "useremail": "barnbarn@email.local"
-            }
-        ],
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            }
-        ]
-    },
-    {
-        "userid": 13,
-        "username": "puttat",
-        "primaryemail": "puttat@school.lambda",
-        "useremails": [],
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            }
-        ]
-    },
-    {
-        "userid": 14,
-        "username": "misskitty",
-        "primaryemail": "misskitty@school.lambda",
-        "useremails": [
-            {
-                "useremailid": 15,
-                "useremail": "favbun@hops.local"
-            }
-        ],
-        "roles": [
-            {
-                "role": {
-                    "roleid": 2,
-                    "name": "USER"
-                }
-            }
-        ]
-    }
-]
+
 ```
 
 </details>
 
 <details>
-<summary>http://localhost:2019/users/user/7</summary>
+<summary>http://localhost:2019/useremails/useremail/8</summary>
 
 ```JSON
-{
-    "userid": 7,
-    "username": "cinnamon",
-    "primaryemail": "cinnamon@lambdaschool.local",
-    "useremails": [
-        {
-            "useremailid": 9,
-            "useremail": "favbun@hops.local"
-        },
-        {
-            "useremailid": 10,
-            "useremail": "bunny@email.local"
-        }
-    ],
-    "roles": [
-        {
-            "role": {
-                "roleid": 2,
-                "name": "USER"
-            }
-        },
-        {
-            "role": {
-                "roleid": 3,
-                "name": "DATA"
-            }
-        }
-    ]
-}
+
 ```
 
 </details>
 
 <details>
-<summary>http://localhost:2019/users/user/name/cinnamon</summary>
-
-```JSON
-{
-    "userid": 7,
-    "username": "cinnamon",
-    "primaryemail": "cinnamon@lambdaschool.local",
-    "useremails": [
-        {
-            "useremailid": 9,
-            "useremail": "favbun@hops.local"
-        },
-        {
-            "useremailid": 10,
-            "useremail": "bunny@email.local"
-        }
-    ],
-    "roles": [
-        {
-            "role": {
-                "roleid": 2,
-                "name": "USER"
-            }
-        },
-        {
-            "role": {
-                "roleid": 3,
-                "name": "DATA"
-            }
-        }
-    ]
-}
-```
-
-</details>
-
-<details>
-<summary>http://localhost:2019/users/user/name/like/da</summary>
-
-```JSON
-[]
-```
-
-</details>
-
-<details>
-<summary>POST http://localhost:2019/users/user</summary>
-
-DATA
-
-```JSON
-{
-    "username": "Mojo",
-    "primaryemail": "mojo@lambdaschool.local",
-    "password" : "Coffee123",
-    "useremails": [
-        {
-            "useremail": "mojo@mymail.local"
-        },
-        {
-            "useremail": "mojo@email.local"
-        }
-        ],
-    "roles": [
-        {
-            "role": {
-                "roleid": 1
-            }
-        },
-        {
-            "role": {
-                "roleid": 2
-            }
-        }
-    ]
-}
-```
-
-OUTPUT
-
-```TEXT
-No Body Data
-
-Location Header: http://localhost:2019/users/user/17
-Status 201 Created
-```
-
-</details>
-
-<details>
-<summary>http://localhost:2019/users/user/name/mojo</summary>
-
-</details>
-
-<details>
-<summary>PUT http://localhost:2019/users/user/14</summary>
-
-DATA
-
-```JSON
-{
-    "username": "stumps",
-    "primaryemail": "stumps@lambdaschool.local",
-    "password" : "EarlGray123",
-    "useremails": [
-        {
-            "useremail": "stumps@mymail.local"
-        },
-        {
-            "useremail": "stumps@email.local"
-        }
-        ],
-    "roles": [
-        {  
-            "role": {
-                "roleid": 3
-            }
-        },
-        {  
-            "role": {
-                "roleid": 1
-            }
-        }
-    ]
-}
-```
-
-OUTPUT
+<summary>DELETE http://localhost:2019/useremails/useremail/8</summary>
 
 ```TEXT
 No Body Data
@@ -907,125 +1356,53 @@ Status OK
 
 </details>
 
-<details>
-<summary>http://localhost:2019/users/user/name/stumps</summary>
-
-```JSON
-{
-    "userid": 16,
-    "username": "stumps",
-    "primaryemail": "stumps@lambdaschool.local",
-    "useremails": [
-        {
-            "useremailid": 19,
-            "useremail": "stumps@mymail.local"
-        },
-        {
-            "useremailid": 20,
-            "useremail": "stumps@email.local"
-        }
-    ],
-    "roles": [
-        {
-            "role": {
-                "roleid": 1,
-                "name": "ADMIN"
-            }
-        },
-        {
-            "role": {
-                "roleid": 3,
-                "name": "DATA"
-            }
-        }
-    ]
-}
-```
-
-</details>
 
 <details>
-<summary>PATCH http://localhost:2019/users/user/7</summary>
+<summary>PUT http://localhost:2019/useremails/useremail/9/email/favbun@hops.local</summary>
 
 DATA
 
 ```JSON
-{
-    "username": "cinabun",
-    "primaryemail": "cinabun@lambdaschool.home",
-    "useremails": [
-    {
-            "useremail": "cinnamon@mymail.home"
-    },
-    {
-            "useremail": "hops@mymail.home"
-    },
-    {
-            "useremail": "bunny@email.home"
-    }
-    ]
-}
+
 ```
 
 OUTPUT
 
 ```TEXT
-No Body Data
-
 Status OK
 ```
 
 </details>
 
 <details>
-<summary>http://localhost:2019/users/user/name/cinabun</summary>
-
-</details>
+<summary>http://localhost:2019/useremails/useremail/9</summary>
 
 ```JSON
-{
-    "userid": 7,
-    "username": "cinabun",
-    "primaryemail": "cinabun@lambdaschool.home",
-    "useremails": [
-        {
-            "useremailid": 21,
-            "useremail": "cinnamon@mymail.home"
-        },
-        {
-            "useremailid": 22,
-            "useremail": "hops@mymail.home"
-        },
-        {
-            "useremailid": 23,
-            "useremail": "bunny@email.home"
-        }
-    ],
-    "roles": [
-        {
-            "role": {
-                "roleid": 2,
-                "name": "USER"
-            }
-        },
-        {
-            "role": {
-                "roleid": 3,
-                "name": "DATA"
-            }
-        }
-    ]
-}
-```
 
-<details>
-
-<summary>DELETE http://localhost:2019/users/user/14</summary>
-
-```TEXT
-No Body Data
-
-Status OK
 ```
 
 </details>
+
+<details>
+<summary>POST http://localhost:2019/useremails/user/14/email/favbun@hops.local</summary>
+
+OUTPUT
+
+```TEXT
+Status CREATED
+
+Location Header: http://localhost:2019/useremails/useremail/15
+```
+
+</details>
+
+<details>
+<summary>http://localhost:2019/useremails/useremail/15</summary>
+
+```JSON
+
+```
+
+</details>
+
+
