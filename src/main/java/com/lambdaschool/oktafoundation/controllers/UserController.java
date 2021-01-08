@@ -96,6 +96,29 @@ public class UserController
     }
 
     /**
+     * Returns the User record for the currently authenticated user based off of the supplied access token
+     * <br>Example: <a href="http://localhost:2019/users/getuserinfo">http://localhost:2019/users/getuserinfo</a>
+     *
+     * @param authentication The authenticated user object provided by Spring Security
+     * @return JSON of the current user. Status of OK
+     * @see UserService#findByName(String) UserService.findByName(authenticated user)
+     */
+    @GetMapping(value = "/getuserinfo", produces = {"application/json"})
+    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
+    {   System.out.println("THIS IS AUTH "+authentication);
+        System.out.println("This is auth.getname" + authentication.getName());
+        User u = userService.findByName(authentication.getName());
+        return new ResponseEntity<>(u, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/user/{id}/apps", produces = "application/json")
+    public ResponseEntity<?> getUserApps(@PathVariable long id)
+    {
+        User u = userService.findUserById(id);
+        return new ResponseEntity<>(u.getApplications(), HttpStatus.OK);
+    }
+
+    /**
      * Given a complete User Object, create a new User record and accompanying useremail records
      * and user role records.
      * <br> Example: <a href="http://localhost:2019/users/user">http://localhost:2019/users/user</a>
@@ -178,26 +201,5 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * Returns the User record for the currently authenticated user based off of the supplied access token
-     * <br>Example: <a href="http://localhost:2019/users/getuserinfo">http://localhost:2019/users/getuserinfo</a>
-     *
-     * @param authentication The authenticated user object provided by Spring Security
-     * @return JSON of the current user. Status of OK
-     * @see UserService#findByName(String) UserService.findByName(authenticated user)
-     */
-    @GetMapping(value = "/getuserinfo", produces = {"application/json"})
-    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
-    {   System.out.println("THIS IS AUTH "+authentication);
-        System.out.println("This is auth.getname" + authentication.getName());
-        User u = userService.findByName(authentication.getName());
-        return new ResponseEntity<>(u, HttpStatus.OK);
-    }
 
-    @GetMapping(value = "/user/{id}/apps", produces = "application/json")
-    public ResponseEntity<?> getUserApps(@PathVariable long id)
-    {
-        User u = userService.findUserById(id);
-        return new ResponseEntity<>(u.getApplications(), HttpStatus.OK);
-    }
 }
