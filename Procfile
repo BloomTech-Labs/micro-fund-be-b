@@ -1,1 +1,1 @@
-web java $JAVA_OPTS -Dserver.port=$PORT -jar target/microfund-b.jar.original
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar "target/testmicrofund.jar"
