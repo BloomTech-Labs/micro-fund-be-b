@@ -30,6 +30,6 @@ public interface ApplicationService
 
     Application updateAppStatus(Application application, long id);
 
-    Application saveByAuth(User user, Application app);
+    Application saveByAuth(User user, Application app, long id);
 
 }
