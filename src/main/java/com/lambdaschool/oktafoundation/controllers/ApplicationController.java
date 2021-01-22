@@ -68,9 +68,8 @@ public class ApplicationController
     //    }
 
     //This is the endpoint for users to use to update their own applications
-    @PatchMapping(value = "/app/{appid}", consumes = {"application/json"}) public ResponseEntity<?>
-    updateListing(
-        Authentication authentication, @RequestBody Application updateApp, @PathVariable long appid)
+    @PatchMapping(value = "/app/{appid}", consumes = {"application/json"})
+    public ResponseEntity<?> updateListing( Authentication authentication, @RequestBody Application updateApp, @PathVariable long appid)
     {
         User u = userService.findByName(authentication.getName());
         List<Application> userList = new ArrayList<>();

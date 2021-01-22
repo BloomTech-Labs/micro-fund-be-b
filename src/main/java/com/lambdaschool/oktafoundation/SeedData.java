@@ -1,10 +1,7 @@
 package com.lambdaschool.oktafoundation;
 
 import com.lambdaschool.oktafoundation.models.*;
-import com.lambdaschool.oktafoundation.services.ApplicationService;
-import com.lambdaschool.oktafoundation.services.OrganizationService;
-import com.lambdaschool.oktafoundation.services.RoleService;
-import com.lambdaschool.oktafoundation.services.UserService;
+import com.lambdaschool.oktafoundation.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -20,6 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class SeedData implements CommandLineRunner
 {
+    /**
+     * Connects the PartnerApplication Service to this process
+     * w.a
+     */
+    @Autowired
+    PartnerApplicationService partnerApplicationService;
+
     /**
      * Connects the Role Service to this process
      */
@@ -54,6 +58,7 @@ public class SeedData implements CommandLineRunner
         userService.deleteAll();
         roleService.deleteAll();
         applicationService.deleteAll();
+        partnerApplicationService.deleteAll();
 
         Role r1 = new Role("admin");
         Role r2 = new Role("user");

@@ -65,6 +65,11 @@ public class User extends Auditable
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Application> applications = new ArrayList<>();
 
+    // PartnerApplications w.a.
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private List<PartnerApplication> partnerApplications = new ArrayList<>();
+
     /**
      * Default constructor used primarily by the JPA.
      */
@@ -214,6 +219,16 @@ public class User extends Auditable
     public void setApplications(List<Application> applications)
     {
         this.applications = applications;
+    }
+
+    public List<PartnerApplication> getPartnerApplications()
+    {
+        return partnerApplications;
+    }
+
+    public void setPartnerApplications(List<PartnerApplication> partnerApplications)
+    {
+        this.partnerApplications = partnerApplications;
     }
 
     public List<Organization> getOrganizations()
