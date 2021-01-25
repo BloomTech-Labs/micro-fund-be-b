@@ -43,14 +43,14 @@ public class PartnerApplicationController
     @GetMapping(value = "/partapp/{id}", produces = "application/json")
     public ResponseEntity<?> getPartAppById(@PathVariable long id)
     {
-        PartnerApplication partnerApplication = partnerAppService.findPartAppById(id);
+        PartnerApplication partnerApplication = partnerApplicationService.findPartAppById(id);
         return new ResponseEntity<>(partnerApplication, HttpStatus.OK);
     }
     // Gets the partner application by id and updates the status to 'accept' w.a.
     @PatchMapping(value = "/app/{id}/status", consumes = "application/json")
     public ResponseEntity<?> updateUser(@RequestBody PartnerApplication updatePartApp, @PathVariable long id)
     {
-        partnerAppService.updatePartAppStatus(updatePartApp, id);
+        partnerApplicationService.updatePartAppStatus(updatePartApp, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -76,7 +76,7 @@ public class PartnerApplicationController
             }
         }
 
-        partnerAppService.update(user, updatePartApp, id);
+        partnerApplicationService.update(user, updatePartApp, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -87,7 +87,7 @@ public class PartnerApplicationController
         User user = userService.findByName(authentication.getName());
 
         newapp.setPartappid(0);
-        newapp = partnerAppService.saveByAuth(user, newapp, id);
+        newapp = partnerApplicationService.saveByAuth(user, newapp, id);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newOrgURI = ServletUriComponentsBuilder.fromCurrentRequest()

@@ -3,9 +3,13 @@ package com.lambdaschool.oktafoundation.services;
 
 import com.lambdaschool.oktafoundation.models.PartnerApplication;
 import com.lambdaschool.oktafoundation.models.User;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
+@Service(value = "partnerApplicationService")
 public class PartnerApplicationServiceImpl implements PartnerApplicationService
 {
     @Override

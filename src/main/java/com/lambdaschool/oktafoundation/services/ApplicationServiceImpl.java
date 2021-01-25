@@ -155,12 +155,11 @@ public class ApplicationServiceImpl implements ApplicationService
         return apprepos.save(currentApp);
     }
 
-
-
-
     @Transactional
     @Override
-    public Application saveByAuth(User user, Application application)
+    public Application saveByAuth(
+        User user,
+        Application application, long id)
     {
         Application newApp = new Application();
         User dbuser = userrepos.findById(user.getUserid())
