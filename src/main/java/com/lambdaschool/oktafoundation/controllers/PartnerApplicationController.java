@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestBody("/parnterapps")
+@RequestMapping("/partnerapps")
 public class PartnerApplicationController
 {
     @Autowired
