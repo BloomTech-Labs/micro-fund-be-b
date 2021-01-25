@@ -24,7 +24,7 @@ import java.util.List;
 public class PartnerApplicationController
 {
     @Autowired
-    private PartnerApplicationService partnerAppService;
+    private PartnerApplicationService partnerApplicationService;
 
     @Autowired
     private UserService userService;
@@ -34,7 +34,7 @@ public class PartnerApplicationController
     @GetMapping(value = "/all", produces = "application/json")
     public ResponseEntity<?> listAllPartApplications()
     {
-        List<PartnerApplication> myPartApps = partnerAppService.findAll();
+        List<PartnerApplication> myPartApps = partnerApplicationService.findAll();
         return new ResponseEntity<>(myPartApps, HttpStatus.OK);
     }
 
