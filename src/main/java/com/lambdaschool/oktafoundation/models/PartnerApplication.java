@@ -13,6 +13,7 @@ public class PartnerApplication extends Auditable
     private String name;
     private String address;
     private String phone;
+    private String type;
     private String description;
     private String status;
 
@@ -28,6 +29,7 @@ public class PartnerApplication extends Auditable
         String name,
         String address,
         String phone,
+        String type,
         String description,
         String status,
         User user)
@@ -35,6 +37,7 @@ public class PartnerApplication extends Auditable
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.type = type;
         this.description = description;
         this.status = status;
         this.user = user;
@@ -78,6 +81,16 @@ public class PartnerApplication extends Auditable
     public void setPhone(String phone)
     {
         this.phone = phone;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
     }
 
     public String getDescription()

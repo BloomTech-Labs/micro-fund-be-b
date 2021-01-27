@@ -48,6 +48,8 @@ public class PartnerApplicationServiceImpl implements PartnerApplicationService
 
         newPartApp.setPhone(partnerApplication.getPhone());
 
+        newPartApp.setType(partnerApplication.getType());
+
         newPartApp.setDescription(partnerApplication.getDescription());
 
         newPartApp.setStatus(partnerApplication.getStatus());
@@ -82,6 +84,11 @@ public class PartnerApplicationServiceImpl implements PartnerApplicationService
         if (partnerApplication.getPhone() != null)
         {
             currentPartApp.setPhone(partnerApplication.getPhone());
+        }
+
+        if (partnerApplication.getType() != null)
+        {
+            currentPartApp.setType(partnerApplication.getType());
         }
 
         if (partnerApplication.getDescription() != null)
@@ -152,6 +159,7 @@ public class PartnerApplicationServiceImpl implements PartnerApplicationService
         newPartApp.setName(partnerApplication.getName());
         newPartApp.setAddress(partnerApplication.getAddress());
         newPartApp.setPhone(partnerApplication.getPhone());
+        newPartApp.setType(partnerApplication.getType());
         newPartApp.setDescription(partnerApplication.getDescription());
         newPartApp.setUser(user);
 
