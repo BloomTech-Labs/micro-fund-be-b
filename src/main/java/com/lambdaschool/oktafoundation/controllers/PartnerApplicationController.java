@@ -80,7 +80,7 @@ public class PartnerApplicationController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    // posts new application to database w.a.
     @PostMapping(value = "/partapp/{id}", consumes = "application/json")
     public ResponseEntity<?> addNewPartnerApplication(Authentication authentication, @RequestBody PartnerApplication newapp, @PathVariable long id) throws URISyntaxException
     {
