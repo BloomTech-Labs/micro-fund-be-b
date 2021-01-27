@@ -1,7 +1,5 @@
 package com.lambdaschool.oktafoundation.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-
 import javax.persistence.*;
 
 @Entity
@@ -111,4 +109,5 @@ public class PartnerApplication extends Auditable
     {
         this.user = user;
     }
+
 }
