@@ -15,6 +15,7 @@ public class Application extends Auditable
     private String name;
     private String address;
     private String phone;
+    private String type;
     private String reason;
     private String status;
 
@@ -36,6 +37,7 @@ public class Application extends Auditable
         String name,
         String address,
         String phone,
+        String type,
         String reason,
         String status,
         Organization organization,
@@ -44,6 +46,7 @@ public class Application extends Auditable
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.type = type;
         this.reason = reason;
         this.status = status;
         this.organization = organization;
@@ -88,6 +91,16 @@ public class Application extends Auditable
     public void setPhone(String phone)
     {
         this.phone = phone;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
     }
 
     public String getReason()

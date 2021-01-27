@@ -72,6 +72,8 @@ public class ApplicationServiceImpl implements ApplicationService
 
         newApp.setPhone(application.getPhone());
 
+        newApp.setType(application.getType());
+
         newApp.setReason(application.getReason());
 
         newApp.setStatus(application.getStatus());
@@ -116,6 +118,11 @@ public class ApplicationServiceImpl implements ApplicationService
         if (application.getPhone() != null)
         {
             currentApp.setPhone(application.getPhone());
+        }
+
+        if (application.getType() != null)
+        {
+            currentApp.setType(application.getType());
         }
 
         if (application.getReason() != null)
@@ -184,6 +191,7 @@ public class ApplicationServiceImpl implements ApplicationService
         newApp.setName(application.getName());
         newApp.setAddress(application.getAddress());
         newApp.setPhone(application.getPhone());
+        newApp.setType(application.getType());
         newApp.setReason(application.getReason());
         newApp.setStatus(application.getStatus());
         // Application has a many to one relationship with organization
