@@ -167,9 +167,9 @@ public class ApplicationServiceImpl implements ApplicationService
     public Application saveByAuth(User user, Application application)
     {
         Application newApp = new Application();
-//        User dbuser = userrepos.findById(user.getUserid())
-//            .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found"));
-//        newApp.setUser(dbuser);
+        User dbuser = userrepos.findById(user.getUserid())
+            .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found"));
+        newApp.setUser(dbuser);
 
 
         if (application.getAppid() != 0)
