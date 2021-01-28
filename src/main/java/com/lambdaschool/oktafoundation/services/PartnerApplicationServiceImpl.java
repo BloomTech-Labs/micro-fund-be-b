@@ -146,9 +146,9 @@ public class PartnerApplicationServiceImpl implements PartnerApplicationService
     public PartnerApplication saveByAuth(User user, PartnerApplication partnerApplication)
     {
         PartnerApplication newPartApp = new PartnerApplication();
-//        User u = userrepos.findById(user.getUserid())
-//            .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
-//        newPartApp.setUser(u);
+        User u = userrepos.findById(user.getUserid())
+            .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
+        newPartApp.setUser(u);
 
         if (partnerApplication.getPartappid() != 0)
         {
