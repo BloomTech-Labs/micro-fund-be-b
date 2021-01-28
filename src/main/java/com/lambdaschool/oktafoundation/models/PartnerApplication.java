@@ -1,66 +1,56 @@
 package com.lambdaschool.oktafoundation.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app")
-public class Application extends Auditable
+@Table(name = "partapp")
+public class PartnerApplication extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long appid;
+    private long partappid;
 
     private String name;
     private String address;
     private String phone;
     private String type;
-    private String reason;
+    private String description;
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "orgid", nullable = false)
-    @JsonIgnoreProperties(value = {"applications","users"}, allowSetters = true)
-    private Organization organization;
-
-    @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    @JsonIgnoreProperties(value = {"applications","organizations"}, allowSetters = true)
     private User user;
 
-    public Application()
+    public PartnerApplication()
     {
     }
 
-    public Application(
+    public PartnerApplication(
         String name,
         String address,
         String phone,
         String type,
-        String reason,
+        String description,
         String status,
-        Organization organization,
         User user)
     {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.type = type;
-        this.reason = reason;
+        this.description = description;
         this.status = status;
-        this.organization = organization;
         this.user = user;
     }
 
-    public long getAppid()
+    public long getPartappid()
     {
-        return appid;
+        return partappid;
     }
 
-    public void setAppid(long appid)
+    public void setPartappid(long partappid)
     {
-        this.appid = appid;
+        this.partappid = partappid;
     }
 
     public String getName()
@@ -103,14 +93,14 @@ public class Application extends Auditable
         this.type = type;
     }
 
-    public String getReason()
+    public String getDescription()
     {
-        return reason;
+        return description;
     }
 
-    public void setReason(String reason)
+    public void setDescription(String description)
     {
-        this.reason = reason;
+        this.description = description;
     }
 
     public String getStatus()
@@ -123,16 +113,6 @@ public class Application extends Auditable
         this.status = status;
     }
 
-    public Organization getOrganization()
-    {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization)
-    {
-        this.organization = organization;
-    }
-
     public User getUser()
     {
         return user;
@@ -142,6 +122,5 @@ public class Application extends Auditable
     {
         this.user = user;
     }
-
 
 }

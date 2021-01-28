@@ -72,6 +72,8 @@ public class ApplicationServiceImpl implements ApplicationService
 
         newApp.setPhone(application.getPhone());
 
+        newApp.setType(application.getType());
+
         newApp.setReason(application.getReason());
 
         newApp.setStatus(application.getStatus());
@@ -118,6 +120,11 @@ public class ApplicationServiceImpl implements ApplicationService
             currentApp.setPhone(application.getPhone());
         }
 
+        if (application.getType() != null)
+        {
+            currentApp.setType(application.getType());
+        }
+
         if (application.getReason() != null)
         {
             currentApp.setReason(application.getReason());
@@ -155,9 +162,6 @@ public class ApplicationServiceImpl implements ApplicationService
         return apprepos.save(currentApp);
     }
 
-
-
-
     @Transactional
     @Override
     public Application saveByAuth(User user, Application application)
@@ -185,6 +189,7 @@ public class ApplicationServiceImpl implements ApplicationService
         newApp.setName(application.getName());
         newApp.setAddress(application.getAddress());
         newApp.setPhone(application.getPhone());
+        newApp.setType(application.getType());
         newApp.setReason(application.getReason());
         newApp.setStatus(application.getStatus());
         // Application has a many to one relationship with organization
@@ -194,4 +199,5 @@ public class ApplicationServiceImpl implements ApplicationService
 
         return apprepos.save(newApp);
     }
+
 }

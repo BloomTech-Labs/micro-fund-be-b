@@ -4,10 +4,15 @@ import com.okta.spring.boot.oauth.Okta;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class OktaAuthSecurityConfig extends WebSecurityConfigurerAdapter
 {
     @Bean
@@ -16,6 +21,9 @@ public class OktaAuthSecurityConfig extends WebSecurityConfigurerAdapter
     {
         return new JwtAuthenticationFilter();
     }
+
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
@@ -77,4 +85,5 @@ public class OktaAuthSecurityConfig extends WebSecurityConfigurerAdapter
             .frameOptions()
             .disable();
     }
+
 }

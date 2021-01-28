@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
     // Using the service is preferred so for save, the service is used
     @Autowired
     UserService userService;
-
+//
     /**
      * A method in this controller adds a new user to the application with the role User so needs access to Role Services to do this.
      */
@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         FilterChain filterChain) throws ServletException, IOException
     {
         // find the username of the authenticated user
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
 
         if (!(authentication instanceof AnonymousAuthenticationToken))
         {

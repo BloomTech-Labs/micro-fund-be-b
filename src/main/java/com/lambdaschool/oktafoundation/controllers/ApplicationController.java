@@ -68,9 +68,8 @@ public class ApplicationController
     //    }
 
     //This is the endpoint for users to use to update their own applications
-    @PatchMapping(value = "/app/{appid}", consumes = {"application/json"}) public ResponseEntity<?>
-    updateListing(
-        Authentication authentication, @RequestBody Application updateApp, @PathVariable long appid)
+    @PatchMapping(value = "/app/{appid}", consumes = {"application/json"})
+    public ResponseEntity<?> updateListing( Authentication authentication, @RequestBody Application updateApp, @PathVariable long appid)
     {
         User u = userService.findByName(authentication.getName());
         List<Application> userList = new ArrayList<>();
@@ -100,11 +99,11 @@ public class ApplicationController
 
         newapp.setAppid(0);
         // could be save or saveByAuth
-        newapp = appService.saveByAuth(u,newapp);
+        newapp = appService.saveByAuth(u, newapp);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newOrgURI = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{appid}")
+            .path("/appid")
             .buildAndExpand(newapp.getAppid())
             .toUri();
         responseHeaders.setLocation(newOrgURI);

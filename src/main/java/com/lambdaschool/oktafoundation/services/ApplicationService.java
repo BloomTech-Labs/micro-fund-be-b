@@ -4,6 +4,7 @@ import com.lambdaschool.oktafoundation.models.Application;
 import com.lambdaschool.oktafoundation.models.Organization;
 import com.lambdaschool.oktafoundation.models.Role;
 import com.lambdaschool.oktafoundation.models.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,6 @@ public interface ApplicationService
 
     Application updateAppStatus(Application application, long id);
 
-    Application saveByAuth(User user, Application app);
+    Application saveByAuth(User user, Application application);
 
 }
