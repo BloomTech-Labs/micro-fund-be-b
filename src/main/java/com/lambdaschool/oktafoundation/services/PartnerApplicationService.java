@@ -19,5 +19,5 @@ public interface PartnerApplicationService
 
     PartnerApplication findPartAppById(long id);
 
-    PartnerApplication saveByAuth(User user, PartnerApplication app, long id);
+    PartnerApplication saveByAuth(User user, PartnerApplication app);
 }

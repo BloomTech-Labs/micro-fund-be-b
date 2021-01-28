@@ -81,17 +81,17 @@ public class PartnerApplicationController
     }
 
     // posts new application to database w.a.
-    @PostMapping(value = "/partapp/{id}", consumes = "application/json")
-    public ResponseEntity<?> addNewPartnerApplication(Authentication authentication, @RequestBody PartnerApplication newapp, @PathVariable long id) throws URISyntaxException
+    @PostMapping(value = "/partapp/new", consumes = "application/json")
+    public ResponseEntity<?> addNewPartnerApplication(Authentication authentication, @RequestBody PartnerApplication newapp) throws URISyntaxException
     {
         User user = userService.findByName(authentication.getName());
 
         newapp.setPartappid(0);
-        newapp = partnerApplicationService.saveByAuth(user, newapp, id);
+        newapp = partnerApplicationService.saveByAuth(user, newapp);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newOrgURI = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{id}")
+            .path("/appid")
             .buildAndExpand(newapp.getPartappid())
             .toUri();
         responseHeaders.setLocation(newOrgURI);

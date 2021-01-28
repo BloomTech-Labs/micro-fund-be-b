@@ -92,18 +92,18 @@ public class ApplicationController
 
 
     // KM - adds a new application to the database TODO
-    @PostMapping(value = "/app/{appid}", consumes = "application/json")
-    public ResponseEntity<?> addNewApplication(Authentication authentication, @RequestBody Application newapp, @PathVariable long appid) throws URISyntaxException
+    @PostMapping(value = "/app/new", consumes = "application/json")
+    public ResponseEntity<?> addNewApplication(Authentication authentication, @RequestBody Application newapp) throws URISyntaxException
     {
         User u = userService.findByName(authentication.getName());
 
         newapp.setAppid(0);
         // could be save or saveByAuth
-        newapp = appService.saveByAuth(u,newapp, appid);
+        newapp = appService.saveByAuth(u, newapp);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newOrgURI = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{appid}")
+            .path("/appid")
             .buildAndExpand(newapp.getAppid())
             .toUri();
         responseHeaders.setLocation(newOrgURI);
