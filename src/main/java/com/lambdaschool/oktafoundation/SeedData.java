@@ -77,6 +77,11 @@ public class SeedData implements CommandLineRunner
         organization3 = organizationService.save(organization3);
 
 
+        // WE NEED AN OKTA USER SETUP WITH ADMIN RIGHTS
+        User uo = new User("llama001@maildrop.cc");
+        uo.getRoles().add(new UserRoles(uo, r1));
+        userService.save(uo);
+
         // The following is an example user!
         /*
         // admin, data, user
@@ -109,8 +114,12 @@ public class SeedData implements CommandLineRunner
 
         User u2 = new User("coolorg@lambdaschool.local");
         u2.getRoles().add(new UserRoles(u2, r2));
-        Application app1 = new Application("Org 1", "123 somewhere drive", "923-567-8965", "i want to help my community", "not reviewed", organization1, u2);
-        Application app2 = new Application("Org 2", "124 rainbow lane", "444-111-3333", "i have a great idea i need help with", "not reviewed", organization2, u2);
+        Application app1 = new Application("Org 1", "123 somewhere drive", "923-567" +
+            "-8965","partner", "i want to help my community", "not reviewed",
+            organization1, u2);
+        Application app2 = new Application("Org 2", "124 rainbow lane", "444-111-3333",
+            "partner", "i have a great idea i need help with", "not reviewed",
+            organization2, u2);
 
         u2.getApplications().add(app1);
         u2.getApplications().add(app2);
@@ -118,7 +127,9 @@ public class SeedData implements CommandLineRunner
 
         User u3 = new User("evencoolerorg@lambdaschool.local");
         u3.getRoles().add(new UserRoles(u3, r3));
-        Application app3 = new Application("Org 3", "534 abbey road", "000-345-9807", "i would love to be a part of this", "not reviewed", organization3, u3);
+        Application app3 = new Application("Org 3", "534 abbey road", "000-345-9807",
+            "partner", "i would love to be a part of this", "not reviewed", organization3,
+            u3);
 
         u3.getApplications().add(app3);
         u3.addOrganization(organization3);

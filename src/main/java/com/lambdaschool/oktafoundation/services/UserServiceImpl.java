@@ -154,9 +154,12 @@ public class UserServiceImpl implements UserService
 //                            ap.getReason(),
 //                            ap.getStatus()));
             newUser.getApplications().add(new Application(ap.getName(),
-                ap.getAddress(), ap.getPhone(),
+                ap.getAddress(),
+                ap.getPhone(),
+                ap.getType(),
                 ap.getReason(),
-                ap.getStatus(), ap.getOrganization(),
+                ap.getStatus(),
+                ap.getOrganization(),
                 newUser));
         }
 
@@ -266,7 +269,9 @@ public class UserServiceImpl implements UserService
 //                                    ap.getReason(),
 //                                    ap.getStatus()));
                     currentUser.getApplications().add(new Application(ap.getName(),
-                        ap.getAddress(), ap.getPhone(),
+                        ap.getAddress(),
+                        ap.getPhone(),
+                        ap.getType(),
                         ap.getReason(),
                         ap.getStatus(), ap.getOrganization(),
                         currentUser));
