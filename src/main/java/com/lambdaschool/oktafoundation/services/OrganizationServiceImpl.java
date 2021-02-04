@@ -77,7 +77,9 @@ public class OrganizationServiceImpl implements OrganizationService
         for (Application ap : organization.getApplications())
         {
             newOrg.getApplications().add(new Application(ap.getName(),
-                ap.getAddress(), ap.getPhone(),
+                ap.getAddress(),
+                ap.getPhone(),
+                ap.getType(),
                 ap.getReason(),
                 ap.getStatus(), newOrg,
                 ap.getUser()));
@@ -128,7 +130,9 @@ public class OrganizationServiceImpl implements OrganizationService
 //                                ap.getStatus()));
 
                 currentOrg.getApplications().add(new Application(ap.getName(),
-                    ap.getAddress(), ap.getPhone(),
+                    ap.getAddress(),
+                    ap.getPhone(),
+                    ap.getType(),
                     ap.getReason(),
                     ap.getStatus(), currentOrg,
                     ap.getUser()));
