@@ -53,6 +53,14 @@ public class OrganizationController
         }
 
         @PreAuthorize("hasAnyRole('ADMIN')")
+        @GetMapping(value = "/org/name/{orgName}", produces = "application/json")
+        public ResponseEntity<?> getOrgByName(@PathVariable String orgName)
+        {
+            Organization o = orgService.findByName(orgName);
+            return new ResponseEntity<>(o, HttpStatus.OK);
+        }
+
+        @PreAuthorize("hasAnyRole('ADMIN')")
         @DeleteMapping(value = "/org/{id}")
         public ResponseEntity<?> deleteOrgById(@PathVariable long id)
         {
