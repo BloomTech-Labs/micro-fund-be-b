@@ -39,7 +39,7 @@ public class PartnerApplicationController
     }
 
     // Gets one partner application by id w.a.
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PARTNER')")
     @GetMapping(value = "/partapp/{id}", produces = "application/json")
     public ResponseEntity<?> getPartAppById(@PathVariable long id)
     {

@@ -1,6 +1,7 @@
 package com.lambdaschool.oktafoundation.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "partapp")
@@ -16,6 +17,7 @@ public class PartnerApplication extends Auditable
     private String type;
     private String description;
     private String status;
+    private Date timestamp;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
@@ -32,6 +34,7 @@ public class PartnerApplication extends Auditable
         String type,
         String description,
         String status,
+        Date timestamp,
         User user)
     {
         this.name = name;
@@ -40,6 +43,7 @@ public class PartnerApplication extends Auditable
         this.type = type;
         this.description = description;
         this.status = status;
+        this.timestamp = timestamp;
         this.user = user;
     }
 
@@ -113,6 +117,16 @@ public class PartnerApplication extends Auditable
         this.status = status;
     }
 
+    public Date getTimestamp()
+    {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp)
+    {
+        this.timestamp = timestamp;
+    }
+
     public User getUser()
     {
         return user;
@@ -122,5 +136,4 @@ public class PartnerApplication extends Auditable
     {
         this.user = user;
     }
-
 }

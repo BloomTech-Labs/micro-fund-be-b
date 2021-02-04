@@ -9,6 +9,10 @@ public interface OrganizationService
 
     Organization findOrgById(long id);
 
+    Organization findByName(String name);
+
+    List<Organization> findByNameContaining(String name);
+
     void delete(long id);
 
     Organization update(Organization organization, long id);
